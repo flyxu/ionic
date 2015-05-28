@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('zlyc', ['ionic'])
+angular.module('zlyc', ['ionic', 'zlyc.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -18,17 +18,55 @@ angular.module('zlyc', ['ionic'])
   });
 })
 
-/*
+// .controller('LoginCtrl',function($scope){
+//   AV.initialize("yl0dfkjdkyg4b6zlmwyzkpijwjlzvw6sgmj3wni828l2qx8p",
+//    "9f6hzy6baq43bhw3r10ddoqz3c9xp2b1dn50su2w9b5swjhv");
+//   // 初始化 param1：应用 id、param2：应用 key
+//   var TestObject = AV.Object.extend("TestObject");
+//   var testObject = new TestObject();
+//   testObject.save({foo: "bar"}, {
+//      success: function(object) {
+//      alert("LeanCloud works!");
+//    }
+   
+//   });
+// })
+
+
 .config(function($stateProvider,$urlRouterProvider){
 
   $stateProvider
-
-  .state('grid',{
-    url: '/grid',
-    abstrct : true,
-    templateUrl: 'templates/grid.html',
-    controller: 'GridCtrl'
+  // splash page
+  .state('splash', {
+    url: '/',
+    templateUrl: 'templates/splash.html',
+    controller: 'SplashCtrl'
+    // onEnter: function($state, User){
+    //   User.checkSession().then(function(hasSession) {
+    //     if (hasSession) $state.go('home');
+    //   });
   })
+
+  .state('home',{
+    url: '/home',
+    abstrct : true,
+    templateUrl: 'templates/home.html',
+    controller: 'HomeCtrl',
+    // don't load the state until we've populated our User, if necessary.
+    // resolve: {
+    //   populateSession: function(User) {
+    //     return User.checkSession();
+    //   }
+    // },
+    // onEnter: function($state, User){
+    //   User.checkSession().then(function(hasSession) {
+    //     if (!hasSession) $state.go('splash');
+    //   });
+    // }
+  })
+
+  $urlRouterProvider.otherwise('/');
+  /*
 
   .state('grid.qbxx'{
     url: '/qbxx',
@@ -90,7 +128,13 @@ angular.module('zlyc', ['ionic'])
     }
   })
 
-
+  */
 })
+.constant('SERVER', {
+  // if using local server
+  //url: 'http://localhost:3000'
 
-*/
+  // if using our public heroku server
+  url: 'https://ionic-songhop.herokuapp.com'
+});
+
