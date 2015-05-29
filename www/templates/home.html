@@ -1,26 +1,27 @@
-<ion-pane>
-      <ion-header-bar class="bar-balanced">
+<ion-view view-title="主页" hide-nav-bar="true">
+
+      <div class="bar bar-header bar-balanced">
         <h1 class="title">能打仗 打胜仗</h1>
-      </ion-header-bar>
+      </div>
 
       <ion-content scroll="false">
         <img ng-src="img/main_middle_bg.png" style="width:100%;height:auto">
         
         <div class="row" >
           <div class="col col-33">
-            <a class="item item-image " href="">
+            <a class="item item-image " href="#/qbxx">
               <img src="img/qbxx.png" width="100%">
               <p >情报信息</p>
             </a>
           </div>
           <div class="col">
-             <a class="item item-image " href="">
+             <a class="item item-image " href="#/zhkz">
               <img src="img/zhkz.png" width="100%">
               <p >指挥控制</p>
             </a>
           </div>
           <div class="col">
-            <a class="item item-image " href="">
+            <a class="item item-image " href="#/jsxl">
               <img src="img/jsxl.png" width="100%">
               <p >军事训练</p>
             </a>
@@ -29,19 +30,19 @@
 
         <div class="row">
           <div class="col">
-            <a class="item item-image " href="">
+            <a class="item item-image " href="#/jygl">
               <img src="img/jygl.png" width="100%">
               <p >教育管理</p>
             </a>
           </div>
           <div class="col">
-             <a class="item item-image " href="">
+             <a class="item item-image " href="#/gfdy">
               <img src="img/gfdy.png" width="100%">
               <p >国防动员</p>
             </a>
           </div>
           <div class="col">
-            <a class="item item-image " href="">
+            <a class="item item-image " href="#txl">
               <img src="img/txl.png" width="100%">
               <p >通讯录</p>
             </a>
@@ -49,7 +50,7 @@
         </div>
       </ion-content>
 
-      <ion-footer-bar class="bar-balanced">
-        <h1 class="title">南京军分区</h1>
-      </ion-footer-bar>
-    </ion-pane>
+      <div class="bar bar-footer bar-balanced">
+        <div class="title">南京军分区</div>
+      </div>
+</ion-view >

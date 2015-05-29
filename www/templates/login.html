@@ -1,4 +1,4 @@
-<ion-view view-title="战力扬城" hide-nav-bar="true" class="splash-page">
+<ion-view view-title="战力扬城" hide-nav-bar="true" class="login-page">
   <ion-content scroll="false">
 
     <div class="padding logo">
@@ -21,13 +21,13 @@
 
 
       <div class="padding-left padding-right">
-        <button class="button button-block action-button" ng-class="{'button-positive': !form.signingUp, 'button-balanced': form.signingUp}" ng-click="submitForm(form.username, form.signingUp)">
-          {{ form.signingUp ? 'Sign up' : 'Sign in' }}
+        <button class="button button-block action-button" ng-class="{'button-positive': !form.signingUp, 'button-balanced': form.signingUp}" ng-click="submitForm(form.username, form.password)">
+          Log in
         </button>
       </div>
     </div>
-    <div class="padding signup-opt" ng-click="form.signingUp = !form.signingUp">
-      {{ form.signingUp ? 'Have an account? Sign in!' : 'Need an account? Sign up!' }}
+    <div class="padding signup-opt" ng-click="goToSign()">
+      Need an account? Sign up!
     </div>
 
   </ion-content>

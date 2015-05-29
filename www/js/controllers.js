@@ -3,20 +3,48 @@ angular.module('zlyc.controllers', ['ionic','zlyc.services'])
 /*
 Controller for the Splash page
 */
-.controller('SplashCtrl', function($scope, $state ,User) {
+.controller('LoginCtrl', function($scope, $state ,User) {
 
     //attempt to signup/login via User.auth
-   $scope.submitForm = function(username, signingUp) {
-      User.auth(username, signingUp).then(function(){
-        // session is now set, so lets redirect to discover page
-        $state.go('home');
+   $scope.submitForm = function(username, password) {
+      User.login(username, password).then(function(isSucess){
+        // session is now set, so lets redirect to home page
+        if(isSucess){
+          $state.go('home');
+        }else{
+          alert('Wrong username or password');
+        }
+      });
+    }
 
-      }, function() {
-        // error handling here
-        alert('Hmm... try another username.');
+   $scope.goToSign = function(){
+      $state.go('signup');
+     
+   }
+
+})
+
+.controller('SignUpCtrl', function($scope, $state ,User) {
+
+    //attempt to signup/login via User.auth
+   $scope.submitForm = function(username, password,email) {
+      User.signUp(username,password,email).then(function(isSucess){
+        // session is now set, so lets redirect to login page
+
+        if(isSucess){
+          alert('SignUp Success!');
+          $state.go('login');
+        }else{
+          alert('Failed , try again !');
+        }
 
       });
     }
+
+   $scope.goToLogin = function(){
+      $state.go('login');
+     
+   }
 
 })
 

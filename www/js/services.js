@@ -3,32 +3,70 @@ angular.module('zlyc.services', ['zlyc.utils'])
 
   var o = {
     username: false,
-    session_id: false,
+    password: false,
+  }
+  
+
+  o.login = function(username, password){
+      var defer = $q.defer();
+      
+      AV.User.logIn(username, password, {
+      success: function(user) {
+        // Do stuff after successful login.
+        o.setSession(user.username, user.password);
+        defer.resolve(true);
+      },
+      error: function(user, error) {
+        // The login failed. Check error to see why.
+        //alert("Error: " + error.code + " " + error.message);
+        defer.resolve(false);
+      }
+    });
+
+    return defer.promise;
   }
   // attempt login or signup
-  o.auth = function(username, signingUp) {
+  o.signUp = function(username, password, email) {
 
-    var authRoute;
+    // var authRoute;
 
-    if (signingUp) {
-      authRoute = 'signup';
-    } else {
-      authRoute = 'login'
-    }
-    return $http.post(SERVER.url + '/' + authRoute, {username: username})
-      .success(function(data){
-        o.setSession(data.username, data.session_id);
-      });
+    // if (signingUp) {
+    //   authRoute = 'signup';
+    // } else {
+    //   authRoute = 'login'
+    // }
+    // return $http.post(SERVER.url + '/' + authRoute, {username: username})
+    //   .success(function(data){
+    //     o.setSession(data.username, data.session_id);
+    //   });
+    var user = new AV.User();
+    user.set("username", username);
+    user.set("password", password);
+    if(email) user.set("email", email);
+
+    var defer = $q.defer();
+    user.signUp(null, {
+      success: function(user) {
+        defer.resolve(true);
+      },
+      error: function(user,error) {
+        // Show the error message somewhere and let the user try again.
+        //alert("Error: " + error.code + " " + error.message);
+        defer.resolve(false);
+      }
+    });
+
+    return defer.promise;
 	}
 
- //  // set session data
- //  o.setSession = function(username, session_id) {
- //    if (username) o.username = username;
- //    if (session_id) o.session_id = session_id;
+  // set session data
+  o.setSession = function(username, password) {
+    if (username) o.username = username;
+    if (password) o.password = password;
 
- //    // set data in localstorage object
- //    $localstorage.setObject('user', { username: username, session_id: session_id });
- //  }
+    // set data in localstorage object
+    $localstorage.setObject('user', { username: username, password: password });
+  }
 
  //  // check if there's a user session present
  //  o.checkSession = function() {
