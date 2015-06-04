@@ -4,10 +4,6 @@ angular.module('zlyc.controllers', ['ionic','zlyc.services'])
 Controller for the Splash page
 */
 .controller('SignInCtrl', function($rootScope, $scope, API, $window) {
-  // if the user is already logged in, take him to his bucketlist
-    if ($rootScope.isSessionActive()) {
-        $window.location.href = ('#/home');
-    }
  
     $scope.user = {
         email: "",
@@ -28,7 +24,7 @@ Controller for the Splash page
         }).success(function (data) {
             $rootScope.setToken(email); // create a session kind of thing on the client side
             $rootScope.hide();
-            $window.location.href = ('#/home');
+            $window.location.href = ('#/home/qbxx');
         }).error(function (error) {
             $rootScope.hide();
             $rootScope.notify("Invalid Username or password");
@@ -36,7 +32,7 @@ Controller for the Splash page
     }
 })
 
-.controller('SignUpCtrl', function($rootScope, $scope, API, $window ) {
+.controller('SignUpCtrl', function($rootScope, $scope, API, $window) {
   $scope.user = {
         email: "",
         password: "",
@@ -59,7 +55,7 @@ Controller for the Splash page
         }).success(function (data) {
             $rootScope.setToken(email); // create a session kind of thing on the client side
             $rootScope.hide();
-            $window.location.href = ('#/home');
+            $window.location.href = ('#/home/qbxx');
         }).error(function (error) {
             $rootScope.hide();
           if(error.error && error.error.code == 11000)
@@ -79,6 +75,30 @@ Controller for the Splash page
 Controller for the Home page
 */
 .controller('HomeCtrl', function($scope) {
+    // $scope.functions = [
+    //     { title: '情报信息' },
+    //     { title: '指挥控制' },
+    //     { title: '军事训练' },
+    //     { title: '教育管理' },
+    //     { title: '国防动员' },
+    //     { title: '通讯录' }
+    //   ];
+
+    // $scope.activeFunction = $scope.functions[Functions.getLastActiveIndex()];
+
+    //  // Called to select the given project
+    // $scope.selectFunction = function(project, index) {
+    //   $scope.activeFunction = project;
+    //   Functions.setLastActiveIndex(index);
+
+    //   switch(index){
+    //     case 0: $state.go('home.qbxx');break;
+    //     case 1: $state.go('home.zhkz');break;
+    //     case 2: $state.go('home.jsxl');break;
+    //   }
+
+    //   $ionicSideMenuDelegate.toggleLeft(false);
+    // };
 
 })
 

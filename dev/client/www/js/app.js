@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-angular.module('zlyc', ['ionic', 'zlyc.controllers'])
+angular.module('zlyc', ['ionic', 'zlyc.controllers','zlyc.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -25,7 +25,13 @@ $stateProvider
     .state('auth', {
         url: "/auth",
         abstract: true,
-        templateUrl: "templates/auth.html"
+        templateUrl: "templates/auth.html",
+        onEnter: function(API,$state){
+                  // if the user is already logged in, take him to his bucketlist
+                  if (API.isSessionActive()) {
+                      $state.go('home.qbxx');
+                  }
+                }
     })
 
     // login page
@@ -35,6 +41,7 @@ $stateProvider
             'auth-signin': {
                 templateUrl: 'templates/auth-signin.html',
                 controller: 'SignInCtrl'
+
             }
         }
     })
@@ -52,46 +59,111 @@ $stateProvider
 
     .state('home',{
       url: '/home',
-      abstrct : true,
+      abstract: true,
       templateUrl: 'templates/home.html',
-      controller: 'HomeCtrl',
+       onEnter: function(API,$state){
+                  // if the user is already logged in, take him to his bucketlist
+                  if (!API.isSessionActive()) {
+                      $state.go('auth.signin');
+                  }
+                }
+      //controller: 'HomeCtrl',
     })
 
-    .state('qbxx',{
+    .state('home.qbxx',{
       url: '/qbxx',
-      templateUrl: 'templates/qbxx.html',
-      controller: 'QbxxCtrl'
-
+      views: {
+          'menuContent':{
+              templateUrl: 'templates/home-qbxx.html',
+              controller: 'QbxxCtrl',
+              onEnter: function($rootScope,$state){
+                  // if the user is already logged in, take him to his bucketlist
+                  if (!$rootScope.isSessionActive()) {
+                      $state.go('auth.signin');
+                  }
+                }
+            }
+        }
     })
 
-    .state('zhkz',{
+    .state('home.zhkz',{
       url: '/zhkz',
-      templateUrl: 'templates/zhkz.html',
-      controller: 'ZhkzCtrl'
+      views: {
+          'menuContent':{
+              templateUrl: 'templates/home-zhkz.html',
+              controller: 'ZhkzCtrl',
+              onEnter: function($rootScope,$state){
+                  // if the user is already logged in, take him to his bucketlist
+                  if (!$rootScope.isSessionActive()) {
+                      $state.go('auth.signin');
+                  }
+                }
+            }
+          }
     })
 
-    .state('jsxl',{
+    .state('home.jsxl',{
       url: '/jsxl',
-      templateUrl: 'templates/jsxl.html',
-      controller: 'JsxlCtrl'
+      views: {
+          'menuContent':{
+              templateUrl: 'templates/home-jsxl.html',
+              controller: 'JsxlCtrl',
+              onEnter: function($rootScope,$state){
+                  // if the user is already logged in, take him to his bucketlist
+                  if (!$rootScope.isSessionActive()) {
+                      $state.go('auth.signin');
+                  }
+                }
+            }
+          }
     })
 
-     .state('jygl',{
+     .state('home.jygl',{
       url: '/jygl',
-      templateUrl: 'templates/jygl.html',
-      controller: 'JyglCtrl'
+      views: {
+          'menuContent':{
+              templateUrl: 'templates/home-jygl.html',
+              controller: 'JyglCtrl',
+              onEnter: function($rootScope,$state){
+                  // if the user is already logged in, take him to his bucketlist
+                  if (!$rootScope.isSessionActive()) {
+                      $state.go('auth.signin');
+                  }
+                }
+            }
+          }
     })
 
-    .state('gfdy',{
+    .state('home.gfdy',{
       url: '/gfdy',
-      templateUrl: 'templates/gfdy.html',
-      controller: 'GfdyCtrl'
+      views: {
+          'menuContent':{
+              templateUrl: 'templates/home-gfdy.html',
+              controller: 'GfdyCtrl',
+              onEnter: function($rootScope,$state){
+                  // if the user is already logged in, take him to his bucketlist
+                  if (!$rootScope.isSessionActive()) {
+                      $state.go('auth.signin');
+                  }
+                }
+            }
+          }
     })
 
-    .state('txl',{
+    .state('home.txl',{
       url: '/txl',
-      templateUrl: 'templates/txl.html',
-      controller: 'TxlCtrl'
+      views: {
+          'menuContent':{
+              templateUrl: 'templates/home-txl.html',
+              controller: 'TxlCtrl',
+              onEnter: function($rootScope,$state){
+                  // if the user is already logged in, take him to his bucketlist
+                  if (!$rootScope.isSessionActive()) {
+                      $state.go('auth.signin');
+                  }
+                }
+            }
+          }
     })
 
   $urlRouterProvider.otherwise('/auth/signin');
@@ -103,6 +175,6 @@ $stateProvider
   //url: 'http://localhost:3000'
 
   // if using our public heroku server
-  url: 'http://192.168.1.120:9804'
+  url: 'http://localhost:9804'
 });
 

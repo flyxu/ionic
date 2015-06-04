@@ -1,56 +1,37 @@
-<ion-view view-title="主页" hide-nav-bar="true">
 
-      <div class="bar bar-header bar-balanced">
-        <h1 class="title">能打仗 打胜仗</h1>
-      </div>
+<ion-side-menus>
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-positive nav-title-slide-ios">
+      <ion-nav-back-button class="button-clear">
+          <i class="icon ion-ios-arrow-back"></i> 
+          Back
+      </ion-nav-back-button>
+    </ion-nav-bar>
 
-      <ion-content scroll="false">
-        <img ng-src="img/main_middle_bg.png" style="width:100%;height:auto">
-        
-        <div class="row" >
-          <div class="col col-33">
-            <a class="item item-image " href="#/qbxx">
-              <img src="img/qbxx.png" width="100%">
-              <p >情报信息</p>
-            </a>
-          </div>
-          <div class="col">
-             <a class="item item-image " href="#/zhkz">
-              <img src="img/zhkz.png" width="100%">
-              <p >指挥控制</p>
-            </a>
-          </div>
-          <div class="col">
-            <a class="item item-image " href="#/jsxl">
-              <img src="img/jsxl.png" width="100%">
-              <p >军事训练</p>
-            </a>
-          </div>
-        </div>
+    <ion-nav-view name="menuContent">
+    </ion-nav-view>
+  </ion-side-menu-content>
 
-        <div class="row">
-          <div class="col">
-            <a class="item item-image " href="#/jygl">
-              <img src="img/jygl.png" width="100%">
-              <p >教育管理</p>
-            </a>
-          </div>
-          <div class="col">
-             <a class="item item-image " href="#/gfdy">
-              <img src="img/gfdy.png" width="100%">
-              <p >国防动员</p>
-            </a>
-          </div>
-          <div class="col">
-            <a class="item item-image " href="#txl">
-              <img src="img/txl.png" width="100%">
-              <p >通讯录</p>
-            </a>
-          </div>
-        </div>
-      </ion-content>
-
-      <div class="bar bar-footer bar-balanced">
-        <div class="title">南京军分区</div>
-      </div>
-</ion-view >
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-positive">
+       <h1 class="title">功能</h1>
+        <button class="button button-clear" ng-click="logout()">logout</button>
+    </ion-header-bar>
+    <ion-content >
+       <ion-list>
+          <ion-item nav-clear menu-close href="#/home/qbxx" class="item-icon-left">
+          <i class="icon ion-stats-bars"></i>情报信息</ion-item>
+          <ion-item nav-clear menu-close href="#/home/zhkz" class="item-icon-left">
+          <i class="icon ion-qr-scanner"></i>指挥控制</ion-item>
+          <ion-item nav-clear menu-close href="#/home/jsxl" class="item-icon-left">
+          <i class="icon ion-jet"></i>军事训练</ion-item>
+          <ion-item nav-clear menu-close href="#/home/jygl" class="item-icon-left">
+          <i class="icon ion-university"></i>教育管理</ion-item>
+          <ion-item nav-clear menu-close href="#/home/gfdy" class="item-icon-left">
+          <i class="icon ion-flag"></i>国防动员</ion-item>
+          <ion-item nav-clear menu-close href="#/home/txl"  class="item-icon-left">
+          <i class="icon ion-iphone"></i>通讯录  </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus> 

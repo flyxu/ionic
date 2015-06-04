@@ -1,12 +1,9 @@
 angular.module('zlyc.services', [])
 .factory('API', function ($rootScope, $http, $ionicLoading, $window,SERVER) {
         $rootScope.show = function (text) {
+
             $rootScope.loading = $ionicLoading.show({
-                content: text ? text : 'Loading',
-                animation: 'fade-in',
-                showBackdrop: true,
-                maxWidth: 200,
-                showDelay: 0
+                template: text ? text : 'Loading',
             });
         };
  
@@ -17,13 +14,14 @@ angular.module('zlyc.services', [])
         $rootScope.logout = function () {
             $rootScope.setToken("");
             $window.location.href = '#/auth/signin';
+
         };
  
         $rootScope.notify =function(text){
             $rootScope.show(text);
             $window.setTimeout(function () {
               $rootScope.hide();
-            }, 1999);
+            }, 999);
         };
  
         $rootScope.setToken = function (token) {
@@ -34,11 +32,12 @@ angular.module('zlyc.services', [])
             return $window.localStorage.token;
         }
  
-        $rootScope.isSessionActive = function () {
-            return $window.localStorage.token ? true : false;
-        }
+        
  
         return {
+            isSessionActive : function () {
+            return $window.localStorage.token ? true : false;
+             },
             signin: function (form) {
                 return $http.post(SERVER.url+'/api/v1/zlyc/auth/login', form);
             },
@@ -46,5 +45,4 @@ angular.module('zlyc.services', [])
                 return $http.post(SERVER.url+'/api/v1/zlyc/auth/register', form);
             }
         }
-    })
-            
+})    
