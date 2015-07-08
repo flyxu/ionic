@@ -29,7 +29,7 @@ $stateProvider
         onEnter: function(API,$state){
                   // if the user is already logged in, take him to his bucketlist
                   if (API.isSessionActive()) {
-                      $state.go('home.qbxx');
+                      $state.go('sidemenu.qbxx');
                   }
                 }
     })
@@ -57,11 +57,11 @@ $stateProvider
       }
     })
 
-    .state('home',{
-      url: '/home',
+    .state('sidemenu',{
+      url: '/sidemenu',
       abstract: true,
-      templateUrl: 'templates/home.html',
-       onEnter: function(API,$state){
+      templateUrl: 'templates/sidemenu.html',
+      onEnter: function(API,$state){
                   // if the user is already logged in, take him to his bucketlist
                   if (!API.isSessionActive()) {
                       $state.go('auth.signin');
@@ -70,101 +70,105 @@ $stateProvider
       //controller: 'HomeCtrl',
     })
 
-    .state('home.qbxx',{
+    .state('sidemenu.qbxx',{
       url: '/qbxx',
       views: {
           'menuContent':{
               templateUrl: 'templates/home-qbxx.html',
               controller: 'QbxxCtrl',
-              onEnter: function($rootScope,$state){
-                  // if the user is already logged in, take him to his bucketlist
-                  if (!$rootScope.isSessionActive()) {
-                      $state.go('auth.signin');
-                  }
-                }
             }
         }
     })
 
-    .state('home.zhkz',{
+    .state('sidemenu.dashboard',{
+      url: '/dashboard',
+      views: {
+          'menuContent':{
+              templateUrl: 'templates/home-dash.html',
+              controller: 'DashboardCtrl',
+            }
+        }
+    })
+
+    .state('sidemenu.zhkz',{
       url: '/zhkz',
       views: {
           'menuContent':{
               templateUrl: 'templates/home-zhkz.html',
               controller: 'ZhkzCtrl',
-              onEnter: function($rootScope,$state){
-                  // if the user is already logged in, take him to his bucketlist
-                  if (!$rootScope.isSessionActive()) {
-                      $state.go('auth.signin');
-                  }
-                }
+              // onEnter: function($rootScope,$state){
+              //     // if the user is already logged in, take him to his bucketlist
+              //     if (!$rootScope.isSessionActive()) {
+              //         $state.go('auth.signin');
+              //     }
+              //   }
             }
           }
     })
 
-    .state('home.jsxl',{
+    .state('sidemenu.jsxl',{
       url: '/jsxl',
       views: {
           'menuContent':{
               templateUrl: 'templates/home-jsxl.html',
               controller: 'JsxlCtrl',
-              onEnter: function($rootScope,$state){
-                  // if the user is already logged in, take him to his bucketlist
-                  if (!$rootScope.isSessionActive()) {
-                      $state.go('auth.signin');
-                  }
-                }
+              // onEnter: function($rootScope,$state){
+              //     // if the user is already logged in, take him to his bucketlist
+              //     if (!$rootScope.isSessionActive()) {
+              //         $state.go('auth.signin');
+              //     }
+              //   }
             }
           }
     })
 
-     .state('home.jygl',{
+     .state('sidemenu.jygl',{
       url: '/jygl',
       views: {
           'menuContent':{
               templateUrl: 'templates/home-jygl.html',
               controller: 'JyglCtrl',
-              onEnter: function($rootScope,$state){
-                  // if the user is already logged in, take him to his bucketlist
-                  if (!$rootScope.isSessionActive()) {
-                      $state.go('auth.signin');
-                  }
-                }
+              // onEnter: function($rootScope,$state){
+              //     // if the user is already logged in, take him to his bucketlist
+              //     if (!$rootScope.isSessionActive()) {
+              //         $state.go('auth.signin');
+              //     }
+              //   }
             }
           }
     })
 
-    .state('home.gfdy',{
+    .state('sidemenu.gfdy',{
       url: '/gfdy',
       views: {
           'menuContent':{
               templateUrl: 'templates/home-gfdy.html',
               controller: 'GfdyCtrl',
-              onEnter: function($rootScope,$state){
-                  // if the user is already logged in, take him to his bucketlist
-                  if (!$rootScope.isSessionActive()) {
-                      $state.go('auth.signin');
-                  }
-                }
+              // onEnter: function($rootScope,$state){
+              //     // if the user is already logged in, take him to his bucketlist
+              //     if (!$rootScope.isSessionActive()) {
+              //         $state.go('auth.signin');
+              //     }
+              //   }
             }
           }
     })
 
-    .state('home.txl',{
+    .state('sidemenu.txl',{
       url: '/txl',
       views: {
           'menuContent':{
               templateUrl: 'templates/home-txl.html',
               controller: 'TxlCtrl',
-              onEnter: function($rootScope,$state){
-                  // if the user is already logged in, take him to his bucketlist
-                  if (!$rootScope.isSessionActive()) {
-                      $state.go('auth.signin');
-                  }
-                }
+              // onEnter: function($rootScope,$state){
+              //     // if the user is already logged in, take him to his bucketlist
+              //     if (!$rootScope.isSessionActive()) {
+              //         $state.go('auth.signin');
+              //     }
+              //   }
             }
           }
-    })
+    });
 
   $urlRouterProvider.otherwise('/auth/signin');
 
@@ -172,9 +176,8 @@ $stateProvider
 
 .constant('SERVER', {
     // if using local server
-  //url: 'http://localhost:3000'
+  //url: 'http://localhost:9804'
 
   // if using our public heroku server
-  url: 'http://localhost:9804'
+  url: 'http://nemoworks.info:9804'
 });
-

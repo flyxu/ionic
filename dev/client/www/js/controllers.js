@@ -4,12 +4,12 @@ angular.module('zlyc.controllers', ['ionic','zlyc.services'])
 Controller for the Splash page
 */
 .controller('SignInCtrl', function($rootScope, $scope, API, $window) {
- 
+
     $scope.user = {
         email: "",
         password: ""
     };
- 
+
     $scope.validateUser = function () {
         var email = this.user.email;
         var password = this.user.password;
@@ -24,12 +24,12 @@ Controller for the Splash page
         }).success(function (data) {
             $rootScope.setToken(email); // create a session kind of thing on the client side
             $rootScope.hide();
-            $window.location.href = ('#/home/qbxx');
+            $window.location.href = ('#/sidemenu/qbxx');
         }).error(function (error) {
             $rootScope.hide();
             $rootScope.notify("Invalid Username or password");
         });
-    }
+    };
 })
 
 .controller('SignUpCtrl', function($rootScope, $scope, API, $window) {
@@ -38,7 +38,7 @@ Controller for the Splash page
         password: "",
         name: ""
     };
- 
+
     $scope.createUser = function () {
       var email = this.user.email;
         var password = this.user.password;
@@ -55,7 +55,7 @@ Controller for the Splash page
         }).success(function (data) {
             $rootScope.setToken(email); // create a session kind of thing on the client side
             $rootScope.hide();
-            $window.location.href = ('#/home/qbxx');
+            $window.location.href = ('#/sidemenu/qbxx');
         }).error(function (error) {
             $rootScope.hide();
           if(error.error && error.error.code == 11000)
@@ -66,9 +66,9 @@ Controller for the Splash page
           {
             $rootScope.notify("Oops something went wrong, Please try again!");
           }
-            
+
         });
-    }
+    };
 })
 
 /*
@@ -102,6 +102,12 @@ Controller for the Home page
 
 })
 
+/*
+Controller for our 控制台
+*/
+.controller('DashboardCtrl', function($scope) {
+
+})
 
 /*
 Controller for our 情报信息
@@ -143,4 +149,4 @@ Controller for our 通讯录
 */
 .controller('TxlCtrl', function($scope) {
 
-})
+});
