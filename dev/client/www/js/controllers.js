@@ -145,8 +145,31 @@ Controller for our 国防动员
 })
 
 /*
+Controller for our 紧急上报
+*/
+.controller('Tab1', function($scope) {
+  $scope.comments = [
+  {
+    "name":"刘强",
+    "content":"高邮民社正常！",
+  },
+  {
+    "name":"刘强",
+    "content":"高邮民社正常！",
+  },
+  {
+  "name":"刘强",
+  "content":"高邮民社正常！",
+  }
+  ];
+
+})
+
+/*
 Controller for our 通讯录
 */
+
+
 .controller('TxlCtrl', function($scope) {
 
 });

@@ -154,6 +154,47 @@ $stateProvider
           }
     })
 
+    .state('sidemenu.tabs', {
+  url: "/tabs",
+  views: {
+    'menuContent': {
+      templateUrl: "templates/tabs.html",
+    }
+  }
+})
+
+.state('sidemenu.tabs.one', {
+  url: "/one",
+  views: {
+    'tab-one': {
+      templateUrl: "templates/tab1.html",
+       controller: 'Tab1',
+    }
+  }
+
+})
+
+.state('sidemenu.tabs.two', {
+  url: "/two",
+  views: {
+    'tab-two': {
+      templateUrl: "templates/tab2.html"
+    }
+  }
+
+})
+
+.state('posts', {
+      url: "/posts",
+      templateUrl: "templates/posts.html"
+  })
+
+  .state('commentview', {
+        url: "/commentview",
+        templateUrl: "templates/commentview.html"
+    })
+
+
     .state('sidemenu.txl',{
       url: '/txl',
       views: {
