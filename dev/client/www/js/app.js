@@ -70,12 +70,12 @@ $stateProvider
       //controller: 'HomeCtrl',
     })
 
-    .state('sidemenu.qbxx',{
-      url: '/qbxx',
+    .state('sidemenu.info',{
+      url: '/info',
       views: {
           'menuContent':{
-              templateUrl: 'templates/home-qbxx.html',
-              controller: 'QbxxCtrl',
+              templateUrl: 'templates/home-info.html',
+              controller: 'InfoCtrl',
             }
         }
     })
@@ -154,7 +154,7 @@ $stateProvider
           }
     })
 
-    .state('sidemenu.tabs', {
+.state('sidemenu.tabs', {
   url: "/tabs",
   views: {
     'menuContent': {
@@ -168,21 +168,12 @@ $stateProvider
   views: {
     'tab-one': {
       templateUrl: "templates/tab1.html",
-       controller: 'Tab1',
+       controller: 'TabCtrl',
     }
   }
 
 })
 
-.state('sidemenu.tabs.two', {
-  url: "/two",
-  views: {
-    'tab-two': {
-      templateUrl: "templates/tab2.html"
-    }
-  }
-
-})
 
 .state('posts', {
       url: "/posts",

@@ -1,4 +1,4 @@
-<ion-view view-title="紧急上报">
+<ion-view view-title="情报信息">
   <ion-nav-buttons side="right">
   <a class="button button-clear" href="#/posts">
     <i class="icon ion-plus"></i>
@@ -6,7 +6,14 @@
 </ion-nav-buttons>
   <ion-content>
     <!-- <ion-refresher on-refresh="doRefresh()"></ion-refresher> -->
+    <ion-list can-swipe="true">
+      <ion-item class="item-divider"><p style="color:red">紧急情报</P></ion-item>
+          <ion-item class="item-thumbnail-left"><img src="img/ionic.png"></ion-item>
+              <ion-item class="item-thumbnail-left"><img src="img/ionic.png"></ion-item>
+                <ion-item class="item-thumbnail-left"><img src="img/ionic.png"></ion-item>
+    </ion-list>
   	<ion-list can-swipe="true"  >
+      <ion-item class="item-divider">情报</ion-item>
   		<ion-item ng-repeat="comment in comments" class="item-thumbnail-left"  href="#/commentview">
 <img ng-src="{{comment.thumbnail}}">
       <div class="row">

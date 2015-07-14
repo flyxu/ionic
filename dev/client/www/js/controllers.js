@@ -112,9 +112,27 @@ Controller for our 控制台
 /*
 Controller for our 情报信息
 */
-.controller('QbxxCtrl', function($scope) {
+.controller('InfoCtrl', function($scope) {
+  $scope.comments = [
+  {
+    "name":"刘强",
+    "content":"高邮民社正常！",
+    "thumbnail": "img/ionic.png",
+  },
+  {
+    "name":"刘强",
+    "content":"高邮民社正常！",
+    "thumbnail": "img/ionic.png",
+  },
+  {
+  "name":"刘强",
+  "content":"高邮民社正常！",
+  "thumbnail": "img/ionic.png",
+  }
+  ];
 
 })
+
 
 /*
 Controller for our 指挥控制
@@ -147,19 +165,22 @@ Controller for our 国防动员
 /*
 Controller for our 紧急上报
 */
-.controller('Tab1', function($scope) {
+.controller('TabCtrl', function($scope) {
   $scope.comments = [
   {
     "name":"刘强",
     "content":"高邮民社正常！",
+    "thumbnail": "img/ionic.png",
   },
   {
     "name":"刘强",
     "content":"高邮民社正常！",
+    "thumbnail": "img/ionic.png",
   },
   {
   "name":"刘强",
   "content":"高邮民社正常！",
+  "thumbnail": "img/ionic.png",
   }
   ];
 

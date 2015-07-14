@@ -25,11 +25,36 @@
   </a>
 </div>
 
+<div class="item">
+<ion-scroll direction="x">
+          <div id="repairs-imgs">
+              <ion-item ng-repeat="image in createImgs" class=" item imgs-img">
+                <div class="item-avatar" ng-click="openModal(image.url)">
+                    <img ng-src="{{image.url}}"  >
+                </div>
+              </ion-item>
+          </div>
+</ion-scroll>
+</div>
+
+<div class="item row">
+<div class="col">
 <div class="item item-checkbox">
 <label class="checkbox">
   <input type="checkbox">
 </label>
-<p>  匿名发送</p>
+<p> 匿名发送</p>
+</div>
+</div>
+
+<div class="col">
+<div class="item item-checkbox">
+<label class="checkbox">
+  <input type="checkbox">
+</label>
+<p>紧急上报</p>
+</div>
+</div>
 </div>
 
 <div class="item">
