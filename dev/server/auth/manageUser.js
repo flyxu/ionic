@@ -1,14 +1,14 @@
 var pwdMgr = require('./managePasswords');
- 
+
 module.exports = function (server, db) {
     // unique index
     db.appUsers.ensureIndex({
         email: 1
     }, {
         unique: true
-    })
- 
-    server.post('/api/v1/zlyc/auth/register', function (req, res, next) {
+    });
+
+    server.post('/api/v1/fcws/auth/register', function (req, res, next) {
         var user = req.params;
         pwdMgr.cryptPassword(user.password, function (err, hash) {
             user.password = hash;
@@ -36,10 +36,10 @@ module.exports = function (server, db) {
         });
         return next();
     });
- 
-    server.post('/api/v1/zlyc/auth/login', function (req, res, next) {
+
+    server.post('/api/v1/fcws/auth/login', function (req, res, next) {
         var user = req.params;
-        if (user.email.trim().length == 0 || user.password.trim().length == 0) {
+        if (user.email.trim().length === 0 || user.password.trim().length === 0) {
             res.writeHead(403, {
                 'Content-Type': 'application/json; charset=utf-8'
             });
@@ -51,9 +51,9 @@ module.exports = function (server, db) {
         db.appUsers.findOne({
             email: req.params.email
         }, function (err, dbUser) {
- 
+
             pwdMgr.comparePassword(user.password, dbUser.password, function (err, isPasswordMatch) {
- 
+
                 if (isPasswordMatch) {
                     res.writeHead(200, {
                         'Content-Type': 'application/json; charset=utf-8'
@@ -69,7 +69,7 @@ module.exports = function (server, db) {
                         error: "Invalid User"
                     }));
                 }
- 
+
             });
         });
         return next();
