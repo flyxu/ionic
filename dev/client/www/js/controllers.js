@@ -1,4 +1,4 @@
-angular.module('zlyc.controllers', ['ionic','zlyc.services'])
+angular.module('fcws.controllers', ['ionic','fcws.services'])
 
 /*
 Controller for the Splash page

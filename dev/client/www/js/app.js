@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-angular.module('zlyc', ['ionic', 'zlyc.controllers','zlyc.services'])
+angular.module('fcws', ['ionic', 'fcws.controllers','fcws.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -208,8 +208,8 @@ $stateProvider
 
 .constant('SERVER', {
     // if using local server
-  //url: 'http://localhost:9804'
+  url: 'http://localhost:9804'
 
   // if using our public heroku server
-  url: 'http://nemoworks.info:9804'
+//  url: 'http://nemoworks.info:9804'
 });
