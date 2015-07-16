@@ -5,7 +5,7 @@ Controller for the Splash page
 .controller('LogInCtrl', function($rootScope, $scope, API, $window) {
       // if the user is already logged in, take him to his bucketlist
     if ($rootScope.isSessionActive()) {
-      $window.location.href = ('#/sidemenu/info');
+      $window.location.href = ('#/sidemenu/dashboard');
     }
 
   // $scope.user = {
@@ -32,6 +32,6 @@ Controller for the Splash page
   //     $rootScope.hide();
   //     $rootScope.notify("Invalid Username or password");
   //   });
-       $window.location.href = ('#/sidemenu/info');
+       $window.location.href = ('#/sidemenu/dashboard');
    };
 });

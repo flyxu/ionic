@@ -2,12 +2,12 @@ angular.module('fcws.controllers')
 /*
 Controller for our 情报信息
 */
-.controller('InfoCtrl', function($scope,InfoListService) {
+.controller('PostsCtrl', function($scope,posts) {
   $scope.user = {
     username: "老鹰"
   };
 
-  $scope.posts = InfoListService.infoList;
+  $scope.posts = posts;
 
   $scope.Like =function (index) {
      var indexUser = $scope.posts[index].likes.indexOf($scope.user.username);

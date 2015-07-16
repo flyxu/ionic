@@ -31,6 +31,6 @@ angular.module('fcws.controllers')
     //     $rootScope.notify("Oops something went wrong, Please try again!");
     //   }
     // });
-      $window.location.href = ('#/sidemenu/info');
+      $window.location.href = ('#/sidemenu/dashboard');
   };
 });

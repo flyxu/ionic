@@ -71,24 +71,44 @@ angular.module('fcws', [
     }
   })
 
-  .state('sidemenu.info', {
-    url: '/info',
+  .state('sidemenu.posts', {
+    url: '/posts',
     views: {
       'menuContent': {
-        templateUrl: 'templates/home-info.html',
-        controller: 'InfoCtrl'
+        templateUrl: 'templates/home-posts.html',
+        controller: 'PostsCtrl',
+        resolve: {
+              posts :function (InfoListService) {
+                return InfoListService.infoList();
+            }
+          }
       }
     }
   })
 
-  .state('post', {
-    url: "/post",
-    templateUrl: "templates/info-post.html"
+  .state('sidemenu.post', {
+    url: '/posts/:post_id',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/post-detail.html",
+        controller: 'PostCtrl',
+        resolve: {
+            post: function($stateParams, InfoListService) {
+              return InfoListService.getPost($stateParams.post_id);
+            }
+          }
+      }
+    }
   })
 
-  .state('commentview', {
-    url: "/commentview",
-    templateUrl: "templates/commentview.html"
+  .state('sidemenu.new', {
+    url: "/new",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/post-new.html",
+        controller: 'ZhkzCtrl'
+      }
+    }
   })
 
   .state('sidemenu.zhkz', {
