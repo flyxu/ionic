@@ -18,3 +18,10 @@
 {
   margin-right: 35px;
 }
+
+#info-up {
+  border-top: 4px solid #f06336;}
+
+#info-posts{
+  border-top: 4px solid #246ce7;
+}

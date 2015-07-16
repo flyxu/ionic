@@ -1,35 +1,61 @@
 <ion-view view-title="情报信息">
   <ion-nav-buttons side="right">
-  <a class="button button-clear" href="#/posts">
-    <i class="icon ion-plus"></i>
-  </a>
-</ion-nav-buttons>
-  <ion-content>
+    <a class="button button-clear" href="#/post">
+      <i class="icon ion-plus"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content >
     <!-- <ion-refresher on-refresh="doRefresh()"></ion-refresher> -->
     <ion-list can-swipe="true">
-      <ion-item class="item-divider"><p style="color:red">紧急情报</P></ion-item>
-          <ion-item class="item-thumbnail-left"><img src="img/ionic.png"></ion-item>
-              <ion-item class="item-thumbnail-left"><img src="img/ionic.png"></ion-item>
-                <ion-item class="item-thumbnail-left"><img src="img/ionic.png"></ion-item>
-    </ion-list>
-  	<ion-list can-swipe="true"  >
-      <ion-item class="item-divider">情报</ion-item>
-  		<ion-item ng-repeat="comment in comments" class="item-thumbnail-left"  href="#/commentview">
-<img ng-src="{{comment.thumbnail}}">
-      <div class="row">
-          <div class="col"><p>{{comment.name}}</P></div>
-        </div>
-        <div  class="row">
-          {{comment.content}}
-        </div>
-        <div class="row">
-          <div class="col">2015-7-9</div>
-          <div class="col"><a class="button button-clear button-positive" href="#/commentview">查看（10）</a></div>
-          <div class="col"><a class="button button-clear button-positive" href="#/commentview">回复（01）</a></div>
+      <ion-item ng-repeat="post in ups" class="card" id ="info-up">
+        <div class="item item-avatar" >
+          <img ng-src="{{post.avatar}}">
+          <h2><i class="icon ion-ios-bolt assertive"></i> {{post.content}}</h2>
+          <p><i class="icon ion-ios-person"></i> {{post.user}}</p>
         </div>
 
-  		</ion-item>
-  	</ion-list>
+        <div class="item tabs tabs-secondary tabs-icon-left">
+          <a class="tab-item" ng-click="upLike($index)">
+            <i class="icon ion-ios-heart-outline assertive" ng-if="!isUpLike($index)"></i>
+            <i class="icon ion-ios-heart assertive" ng-if="isUpLike($index)"></i>
+            {{post.likes.length >0?post.likes.length: 0 }}
+          </a>
+          <a class="tab-item">
+            <i class="icon ion-chatboxes positive"></i>
+            {{post.comments.length >0?post.comments.length:0}}
+          </a>
+          <a class="tab-item">
+            <i class="icon ion-clock dark"></i>
+            {{post.date}}
+          </a>
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-list can-swipe="true">
+      <ion-item ng-repeat="post in posts" class="card" id ="info-posts">
+        <div class="item item-avatar" >
+          <img ng-src="{{post.avatar}}">
+          <h2><i class="icon ion-happy-outline positive"></i> {{post.content}}</h2>
+          <p><i class="icon ion-ios-person"></i> {{post.user}}</p>
+        </div>
+
+        <div class="item tabs tabs-secondary tabs-icon-left">
+          <a class="tab-item" ng-click="postsLike($index)">
+            <i class="icon ion-ios-heart-outline assertive" ng-if="!isPostsLike($index)"></i>
+            <i class="icon ion-ios-heart assertive" ng-if="isPostsLike($index)"></i>
+            {{post.likes.length >0?post.likes.length: 0 }}
+          </a>
+          <a class="tab-item">
+            <i class="icon ion-chatboxes positive"></i>
+            {{post.comments.length >0?post.comments.length:0}}
+          </a>
+          <a class="tab-item">
+            <i class="icon ion-clock dark"></i>
+            {{post.date}}
+          </a>
+        </div>
+      </ion-item>
+    </ion-list>
 
   </ion-content>
 </ion-view>
