@@ -4,6 +4,10 @@ angular.module('fcws.controllers', ['ionic','fcws.services'])
 Controller for the Splash page
 */
 .controller('SignInCtrl', function($rootScope, $scope, API, $window) {
+      // if the user is already logged in, take him to his bucketlist
+    if ($rootScope.isSessionActive()) {
+      $window.location.href = ('#/sidemenu/qbxx');
+    }
 
     $scope.user = {
         email: "",

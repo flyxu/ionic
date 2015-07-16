@@ -25,13 +25,13 @@ $stateProvider
     .state('auth', {
         url: "/auth",
         abstract: true,
-        templateUrl: "templates/auth.html",
-        onEnter: function(API,$state){
-                  // if the user is already logged in, take him to his bucketlist
-                  if (API.isSessionActive()) {
-                      $state.go('sidemenu.qbxx');
-                  }
-                }
+        templateUrl: "templates/auth.html"
+        // onEnter: function(API,$state){
+        //           // if the user is already logged in, take him to his bucketlist
+        //           if (API.isSessionActive()) {
+        //               $state.go('sidemenu.qbxx');
+        //           }
+        //         }
     })
 
     // login page
@@ -61,12 +61,12 @@ $stateProvider
       url: '/sidemenu',
       abstract: true,
       templateUrl: 'templates/sidemenu.html',
-      onEnter: function(API,$state){
-                  // if the user is already logged in, take him to his bucketlist
-                  if (!API.isSessionActive()) {
-                      $state.go('auth.signin');
-                  }
-                }
+      // onEnter: function(API,$state){
+      //             // if the user is already logged in, take him to his bucketlist
+      //             if (!API.isSessionActive()) {
+      //                 $state.go('auth.signin');
+      //             }
+      //           }
       //controller: 'HomeCtrl',
     })
 
