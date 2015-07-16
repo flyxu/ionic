@@ -4,7 +4,10 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-angular.module('fcws', ['ionic', 'fcws.controllers', 'fcws.services'])
+angular.module('fcws', [
+  'ionic',
+  'fcws.controllers',
+  'fcws.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -34,7 +37,7 @@ angular.module('fcws', ['ionic', 'fcws.controllers', 'fcws.services'])
     views: {
       'auth-signin': {
         templateUrl: 'templates/auth-signin.html',
-        controller: 'SignInCtrl'
+        controller: 'LogInCtrl'
       }
     }
   })
