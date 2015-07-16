@@ -14,14 +14,15 @@
 .item-text-wrap {
     overflow: auto;
 }
-.ion-checkmark-circled.icon-actions.margin
-{
+
+.ion-checkmark-circled.icon-actions.margin{
   margin-right: 35px;
 }
 
-#info-up {
-  border-top: 4px solid #f06336;}
-
-#info-posts{
-  border-top: 4px solid #246ce7;
+.posts .content  .card .item{
+    border-top: 4px solid #4f8ef7;
 }
+
+.posts .content .card .item.important{
+    border-top: 4px solid #d2173e;
+  }
