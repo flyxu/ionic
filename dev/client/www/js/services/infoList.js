@@ -11,15 +11,15 @@ angular.module('fcws.services')
       likes: ["猎豹", "狮子"],
       comments: [{
         user: "猎豹",
-        content: "没啥大事吧?",
+        content: "什么鬼?",
         date: "2015-7-14 14:30"
       }, {
         user: "狮子",
-        content: "啥异常说清楚啊？",
+        content: "鬼子来啦 ",
         date: "2015-7-14 14:33",
       }, {
         user: "土狼",
-        content: "请配图",
+        content: "自己解决呗",
         date: "2015-7-14 14:36",
       }]
     }, {
@@ -33,8 +33,8 @@ angular.module('fcws.services')
       likes: ["猎豹", "狮子"],
       comments: [{
         user: "猎豹",
-        content: "没啥大事吧?",
-        date: "2015-07-14"
+        content: "切",
+        date: "2015-07-14 14:20"
       }, {
         user: "狮子",
         content: "啥异常说清楚啊？",
@@ -56,7 +56,7 @@ angular.module('fcws.services')
       comments: [{
         user: "猎豹",
         content: "没啥大事吧?",
-        date: "2015-07-14"
+        date: "2015-07-14 14:20"
       }, {
         user: "狮子",
         content: "啥异常说清楚啊？",

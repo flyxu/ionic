@@ -1,0 +1,24 @@
+showPopup	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/js/controllers/post.js	/^$scope.showPopup = function() {$/;"	function	line:6
+onTap	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/js/controllers/post.js	/^        onTap: function(e) {$/;"	function	line:19
+ion	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^<ion-view view-title="{{post.title}}">$/;"	function	line:1
+ion	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^  <ion-content>$/;"	function	line:2
+div	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^    <div>$/;"	function	line:3
+div	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^      <div class="item item-divider item-positive">$/;"	function	line:4
+i	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^        <i class="icon ion-ios-person"><\/i> {{post.user}}$/;"	function	line:5
+span	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^        <span class="item-note light">$/;"	function	line:6
+div	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^      <div class="item item-text-wrap">$/;"	function	line:10
+ion	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^    <ion-list>$/;"	function	line:15
+div	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^      <div ng-repeat="comment in post.comments" class="card">$/;"	function	line:16
+div	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^        <div class="item item-divider item-positive">$/;"	function	line:17
+span	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^          <span class="item-note light">$/;"	function	line:19
+div	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^        <div class="item item-text-wrap">$/;"	function	line:23
+div	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^       <div class="col col-25"><button class="button">  <i class="icon ion-loading-c"><\/i> Loading...<\/button><\/div>$/;"	function	line:33
+div	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^        <div class="col col-25"><a class="button button-icon icon ion-settings"><\/a><\/div>$/;"	function	line:36
+div	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^       <div class="col col-25"><a class="button button-icon icon ion-settings"><\/a><\/div>$/;"	function	line:39
+div	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^      <div class="col col-25"><a class="button button-icon icon ion-settings"><\/a><\/div>$/;"	function	line:42
+div	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^  <div class="tabs tabs-positive tabs-icon-only tabs-icon-top">$/;"	function	line:45
+a	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^    <a class="tab-item" ng-click="showPopup()"><i class="icon ion-compose"><\/i>评论<\/a>$/;"	function	line:46
+a	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^    <a class="tab-item">$/;"	function	line:47
+i	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^      <i class="icon ion-ios-heart-outline"><\/i>赞$/;"	function	line:48
+a	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^    <a class="tab-item">$/;"	function	line:50
+i	/Users/Calvin/Desktop/Apps/凤城卫士/dev/client/www/templates/post-detail.html	/^      <i class="icon ion-ios-heart"><\/i>赞$/;"	function	line:51
