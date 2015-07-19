@@ -1,24 +1,32 @@
 <ion-view view-title="发表主题">
   <ion-content class="padding">
-    <div class="list card">
+    <div class="card">
+      <div class="item item-divider item-positive">
+        标题
+      </div>
+      <div class="item item-input">
+        <input type="text" placeholder="请输入消息标题"></input>
+      </div>
+    </div>
 
+    <div class="card">
+      <div class="item item-divider item-positive">
+        消息内容
+      </div>
       <div class="item item-input">
         <textarea style="height:200px;" placeholder="请输入消息内容"></textarea>
       </div>
 
-      <div class="item tabs tabs-icon-left tabs-secondary">
+      <!-- <div class="item tabs tabs-icon-left tabs-secondary">
         <a class="tab-item" href="#">
           <i class="icon ion-thumbsup"></i>
         </a>
         <a class="tab-item" href="#">
           <i class="icon ion-ios-camera"></i>
         </a>
-        <a class="tab-item" href="#">
-          <i class="icon ion-thumbsup"></i>
-        </a>
-      </div>
+      </div> -->
 
-      <div class="item">
+      <!-- <div class="item">
         <ion-scroll direction="x">
           <div id="repairs-imgs">
             <ion-item ng-repeat="image in createImgs" class=" item imgs-img">
@@ -28,9 +36,9 @@
             </ion-item>
           </div>
         </ion-scroll>
-      </div>
+      </div> -->
 
-      <div class="item row">
+      <!-- <div class="item row">
         <div class="col">
           <div class="item item-checkbox">
             <label class="checkbox">
@@ -38,7 +46,7 @@
             </label>
             <p> 匿名发送</p>
           </div>
-        </div>
+        </div> -->
 
         <div class="col">
           <div class="item item-checkbox">
@@ -50,11 +58,9 @@
         </div>
       </div>
 
-      <div class="item">
         <button class="button button-block button-balanced">
           发送
         </button>
-      </div>
 
     </div>
   </ion-content>

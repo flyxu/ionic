@@ -44,11 +44,10 @@
 
   <div class="tabs tabs-positive tabs-icon-only tabs-icon-top">
     <a class="tab-item" ng-click="showPopup()"><i class="icon ion-compose"></i>评论</a>
-    <a class="tab-item">
-      <i class="icon ion-ios-heart-outline"></i>赞
-    </a>
-    <a class="tab-item">
-      <i class="icon ion-ios-heart"></i>赞
+    <a class="tab-item" ng-click="Like()">
+      <i class="icon ion-ios-heart" ng-if="isLike()"></i>
+      <i class="icon ion-ios-heart-outline" ng-if="!isLike()"></i>
+      {{post.likes.length >0?post.likes.length: 0 }}
     </a>
   </div>
 
