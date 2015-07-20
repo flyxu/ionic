@@ -8,10 +8,10 @@ Controller for the Splash page
       $window.location.href = ('#/sidemenu/dashboard');
     }
 
-  // $scope.user = {
-  //   email: "",
-  //   password: ""
-  // };
+    $scope.user = {
+      email: "",
+      password: ""
+    };
 
   $scope.validateUser = function() {
   //   var email = this.user.email;

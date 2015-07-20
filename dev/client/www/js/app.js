@@ -106,7 +106,7 @@ angular.module('fcws', [
     views: {
       'menuContent': {
         templateUrl: "templates/post-new.html",
-        controller: 'ZhkzCtrl'
+        controller: 'NewCtrl'
       }
     }
   })

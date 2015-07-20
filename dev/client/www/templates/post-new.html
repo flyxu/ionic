@@ -1,11 +1,11 @@
 <ion-view view-title="发表主题">
   <ion-content class="padding">
     <div class="card">
-      <div class="item item-divider item-positive">
+      <div class="item item-divider item-positive" >
         标题
       </div>
       <div class="item item-input">
-        <input type="text" placeholder="请输入消息标题"></input>
+        <input type="text" placeholder="请输入消息标题" ng-model="post.title"></input>
       </div>
     </div>
 
@@ -14,7 +14,7 @@
         消息内容
       </div>
       <div class="item item-input">
-        <textarea style="height:200px;" placeholder="请输入消息内容"></textarea>
+        <textarea style="height:200px;" placeholder="请输入消息内容" ng-model="post.content"></textarea>
       </div>
 
       <!-- <div class="item tabs tabs-icon-left tabs-secondary">
@@ -51,14 +51,14 @@
         <div class="col">
           <div class="item item-checkbox">
             <label class="checkbox">
-              <input type="checkbox">
+              <input type="checkbox" ng-model="post.important">
             </label>
             <p>紧急上报</p>
           </div>
         </div>
       </div>
 
-        <button class="button button-block button-balanced">
+        <button class="button button-block button-balanced" ng-click="createNewPost()">
           发送
         </button>
 

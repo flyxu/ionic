@@ -95,7 +95,11 @@ angular.module('fcws.services')
       infoList: function(){
         return posts;
       },
+      getListLength: function(){
+        return posts.length;
+      },
       getPost: function(post_id){
+          console.log(post_id);
           var dfd = $q.defer();
           posts.forEach(function(post) {
             if (post.id === post_id) {
@@ -103,6 +107,10 @@ angular.module('fcws.services')
             }
           });
           return dfd.promise;
-        }
-      };
+      },
+      addPost: function (post) {
+          posts.splice(0, 0, post);
+        //  return true;
+      }
+    };
   });

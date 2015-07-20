@@ -47,7 +47,7 @@
     <a class="tab-item" ng-click="Like()">
       <i class="icon ion-ios-heart" ng-if="isLike()"></i>
       <i class="icon ion-ios-heart-outline" ng-if="!isLike()"></i>
-      {{post.likes.length >0?post.likes.length: 0 }}
+      {{post.likes.length >0?post.likes.length: "赞" }}
     </a>
   </div>
 
