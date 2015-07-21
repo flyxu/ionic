@@ -195,12 +195,8 @@ angular.module('fcws', [
 
   .state('yulan', {
     url: "/yulan",
-
-
-        templateUrl: "templates/yulan.html",
-        controller: 'YulanCtrl'
-
-
+    templateUrl: "templates/yulan.html",
+    controller: 'YulanCtrl',
   })
 
 
