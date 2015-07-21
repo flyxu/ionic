@@ -141,6 +141,8 @@ angular.module('fcws', [
     }
   })
 
+
+
   .state('sidemenu.gfdy', {
     url: '/gfdy',
     views: {
@@ -150,6 +152,68 @@ angular.module('fcws', [
       }
     }
   })
+
+  .state('sidemenu.tabs', {
+    url: '/tabs',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/tabs.html',
+        controller: 'TabsCtrl',
+      }
+    }
+  })
+
+  .state('sidemenu.tabs.tzjh', {
+    url: '/tzjh',
+    views: {
+      'tzjh': {
+        templateUrl: 'templates/tzjh.html',
+        controller: 'TzjhCtrl',
+      }
+    }
+  })
+
+  .state('sidemenu.tabs.xlfg', {
+    url: '/xlfg',
+    views: {
+      'xlfg': {
+        templateUrl: 'templates/xlfg.html',
+        controller: 'XlfgCtrl',
+      }
+    }
+  })
+
+  .state('sidemenu.tabs.zlcx', {
+    url: '/zlcx',
+    views: {
+      'zlcx': {
+        templateUrl: 'templates/zlcx.html',
+        controller: 'ZlcxCtrl',
+      }
+    }
+  })
+
+  .state('yulan', {
+    url: "/yulan",
+
+
+        templateUrl: "templates/yulan.html",
+        controller: 'YulanCtrl'
+
+
+  })
+
+
+  .state('sidemenu.tabs.xlkh', {
+    url: '/xlkh',
+    views: {
+      'xlkh': {
+        templateUrl: 'templates/xlkh.html',
+        controller: 'XlkhCtrl',
+      }
+    }
+  })
+
 
   .state('sidemenu.txl', {
     url: '/txl',
