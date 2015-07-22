@@ -1,22 +1,34 @@
 angular.module('fcws.controllers')
-  .controller('PostCtrl', function($scope, post, $ionicPopup) {
-    $scope.post = post;
+  .controller('PostCtrl', function($scope, PostListService, $ionicPopup, User, $filter, $stateParams, $rootScope) {
 
-    $scope.user = {
-      username: "老鹰"
+    $scope.loadPost = function() {
+      $rootScope.show("Please wait... Processing");
+      PostListService.getOne($stateParams.post_id, User.getToken())
+        .success(function(data, status, headers, config) {
+          $scope.post = data[0];
+          $rootScope.hide();
+        })
+        .error(function(data, status, headers, config) {
+          $rootScope.hide();
+          $rootScope.notify("Oops something went wrong!! Please try again later");
+        });
     };
+    $scope.loadPost();
 
     $scope.Like = function() {
-      var indexUser = $scope.post.likes.indexOf($scope.user.username);
+      var username = User.getUserName();
+      var indexUser = $scope.post.likes.indexOf(username);
       if (indexUser > -1) {
         $scope.post.likes.splice(indexUser, 1);
       } else {
-        $scope.post.likes.push($scope.user.username);
+        $scope.post.likes.push(username);
       }
     };
 
     $scope.isLike = function() {
-      var indexUser = $scope.post.likes.indexOf($scope.user.username);
+      console.log(JSON.stringify($scope.post));
+      var username = User.getUserName();
+      var indexUser = $scope.post.likes.indexOf(username);
       if (indexUser != -1) {
         return true;
       } else {
@@ -50,10 +62,12 @@ angular.module('fcws.controllers')
       myPopup.then(function(res) {
         console.log('Tapped!', res);
         if (res) {
+          var date = new Date();
+          var postdate = $filter('date')(date, 'yyyy-MM-dd HH:mm:ss');
           $scope.post.comments.push({
-            user: "老鹰",
+            user: User.getUserName(),
             content: res,
-            date: new Date().toLocaleDateString().toString()
+            date: postdate
           });
         }
       });
