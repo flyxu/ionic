@@ -7,7 +7,8 @@
 angular.module('fcws', [
   'ionic',
   'fcws.controllers',
-  'fcws.services'])
+  'fcws.services',
+  'fcws.utils'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -29,6 +30,7 @@ angular.module('fcws', [
       url: "/auth",
       abstract: true,
       templateUrl: "templates/auth.html",
+      controller: "AccountCtrl"
     })
 
   // login page
@@ -58,7 +60,7 @@ angular.module('fcws', [
     url: '/sidemenu',
     abstract: true,
     templateUrl: 'templates/sidemenu.html',
-      //controller: 'HomeCtrl',
+    controller: 'SidemenuCtrl',
   })
 
   .state('sidemenu.dashboard', {
@@ -77,11 +79,11 @@ angular.module('fcws', [
       'menuContent': {
         templateUrl: 'templates/home-posts.html',
         controller: 'PostsCtrl',
-        resolve: {
-              posts :function (InfoListService) {
-                return InfoListService.infoList();
-            }
-          }
+        // resolve: {
+        //       posts :function (PostListService) {
+        //         return PostListService.infoList();
+        //     }
+        //   }
       }
     }
   })
@@ -92,11 +94,6 @@ angular.module('fcws', [
       'menuContent': {
         templateUrl: "templates/post-detail.html",
         controller: 'PostCtrl',
-        resolve: {
-            post: function($stateParams, InfoListService) {
-              return InfoListService.getPost($stateParams.post_id);
-            }
-          }
       }
     }
   })
@@ -157,6 +154,16 @@ angular.module('fcws', [
       'menuContent': {
         templateUrl: 'templates/home-txl.html',
         controller: 'TxlCtrl',
+      }
+    }
+  })
+
+  .state('sidemenu.config', {
+    url: '/config',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/home-config.html',
+        controller: 'ConfigCtrl',
       }
     }
   });

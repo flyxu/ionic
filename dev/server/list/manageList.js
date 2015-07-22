@@ -2,9 +2,7 @@ module.exports = function(server, db) {
   var validateRequest = require("../auth/validateRequest");
   server.get("/api/v1/fcws/data/list", function(req, res, next) {
     validateRequest.validate(req, res, db, function() {
-      db.infoLists.find({
-        user: req.params.token
-      }, function(err, list) {
+      db.postLists.find({}, function(err, list) {
         res.writeHead(200, {
           'Content-Type': 'application/json; charset=utf-8'
         });
@@ -15,7 +13,7 @@ module.exports = function(server, db) {
   });
   server.get('/api/v1/fcws/data/item/:id', function(req, res, next) {
     validateRequest.validate(req, res, db, function() {
-      db.infoLists.find({
+      db.postLists.find({
         _id: db.ObjectId(req.params.id)
       }, function(err, data) {
         res.writeHead(200, {
@@ -29,7 +27,7 @@ module.exports = function(server, db) {
   server.post('/api/v1/fcws/data/item', function(req, res, next) {
     validateRequest.validate(req, res, db, function() {
       var item = req.params;
-      db.infoLists.save(item,
+      db.postLists.save(item,
         function(err, data) {
           res.writeHead(200, {
             'Content-Type': 'application/json; charset=utf-8'
@@ -41,7 +39,7 @@ module.exports = function(server, db) {
   });
   server.put('/api/v1/fcws/data/item/:id', function(req, res, next) {
     validateRequest.validate(req, res, db, function() {
-      db.infoLists.findOne({
+      db.postLists.findOne({
         _id: db.ObjectId(req.params.id)
       }, function(err, data) {
         // merge req.params/product with the server/product
@@ -70,7 +68,7 @@ module.exports = function(server, db) {
   });
   server.del('/api/v1/fcws/data/item/:id', function(req, res, next) {
     validateRequest.validate(req, res, db, function() {
-      db.infoLists.remove({
+      db.postLists.remove({
         _id: db.ObjectId(req.params.id)
       }, function(err, data) {
         res.writeHead(200, {
