@@ -1,7 +1,7 @@
 var restify     =   require('restify');
 var mongojs     =   require('mongojs');
 var morgan  	=   require('morgan');
-var db          =   mongojs('fcws', ['appUsers','postLists']);
+var db          =   mongojs('fcws', ['appUsers','postLists','replyLists']);
 var server      =   restify.createServer();
 
 
@@ -22,5 +22,6 @@ server.listen(process.env.PORT || 9804, function () {
     console.log("Server started @ ",process.env.PORT || 9804);
 });
 
-var manageUsers = 	require('./auth/manageUser')(server, db);
-var manageLists =   require('./posts/manageList')(server, db);
+var manageUsers = 	require('./api/v1/user')(server, db);
+var manageLists =   require('./api/v1/post')(server, db);
+var manageReplies =   require('./api/v1/reply')(server, db);

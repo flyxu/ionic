@@ -1,5 +1,5 @@
 module.exports = function(server, db) {
-  var validateRequest = require("../auth/validateRequest");
+  var validateRequest = require("../../middlewares/validateRequest");
   //get all posts
   server.get("/api/v1/posts", function(req, res, next) {
     validateRequest.validate(req, res, db, function() {
@@ -52,7 +52,7 @@ module.exports = function(server, db) {
   //   });
   //   return next();
   //
-  //   // var ups = function (req, res, next) {
+  //   // var likes = function (req, res, next) {
   //   //   var replyId = req.params.reply_id;
   //   //   var userId  = req.user.id;
   //   //
@@ -71,13 +71,13 @@ module.exports = function(server, db) {
   //   //       });
   //   //     } else {
   //   //       var action;
-  //   //       reply.ups = reply.ups || [];
-  //   //       var upIndex = reply.ups.indexOf(userId);
+  //   //       reply.likes = reply.likes || [];
+  //   //       var upIndex = reply.likes.indexOf(userId);
   //   //       if (upIndex === -1) {
-  //   //         reply.ups.push(userId);
+  //   //         reply.likes.push(userId);
   //   //         action = 'up';
   //   //       } else {
-  //   //         reply.ups.splice(upIndex, 1);
+  //   //         reply.likes.splice(upIndex, 1);
   //   //         action = 'down';
   //   //       }
   //   //       reply.save(function () {
@@ -122,6 +122,53 @@ module.exports = function(server, db) {
     return next();
   });
 
+  //like a post
+  server.post('/api/v1/post/:post_id/likes', function(req, res, next) {
+    validateRequest.validate(req, res, db, function(user) {
+      var postId = req.params.post_id;
+      var userId = user._id;
+      console.log(postId + " "+userId);
+      db.postLists.findOne({
+        _id: db.ObjectId(postId)
+      }, function(err, post) {
+        if (err) {
+          return next(err);
+        }
+        // console.log("get here");
+        if (!post) {
+            res.status(404);
+            return res.send({error_msg: 'post `' + postId + '` not found'});
+        }
+        // console.log("get here1");
+
+        var action;
+        post.likes = post.likes || [];
+        var likeIndex = post.likes.indexOf(userId+"");
+        if (likeIndex === -1) {
+          post.likes.push(userId+"");
+          action = 'up';
+        } else {
+          post.likes.splice(likeIndex, 1);
+          action = 'down';
+        }
+        db.postLists.save(post, function(err, data) {
+          if(err){
+            next(err);
+          }
+          res.writeHead(200, {
+            'Content-Type': 'application/json; charset=utf-8'
+          });
+          //res.status(200);
+          res.end(JSON.stringify({
+            action: action
+          }));
+        });
+      });
+    });
+    return next();
+  });
+
+
   //update a post
   server.put('/api/v1/post/:id', function(req, res, next) {
     validateRequest.validate(req, res, db, function() {
@@ -138,7 +185,7 @@ module.exports = function(server, db) {
           if (num != "id")
             updProd[num] = req.params[num];
         }
-        db.infoLists.update({
+        db.postLists.update({
           _id: db.ObjectId(req.params.id)
         }, updProd, {
           multi: false

@@ -1,18 +1,18 @@
 angular.module('fcws.controllers')
   .controller('PostCtrl', function($scope, Posts, $ionicPopup, User, $filter, $stateParams,
-     $rootScope,API,$log,Post,$state) {
+    $rootScope, API, $log, Post, $state) {
     //force angular to create post object
     $scope.post = {
-        id: "",
-        token: "",
-        user: "",
-        title: "",
-        content: "",
-        important: false,
-        avatar: "",
-        date: "",
-        likes: [],
-        comments: []
+      id: "",
+      token: "",
+      user: "",
+      title: "",
+      content: "",
+      important: false,
+      avatar: "",
+      date: "",
+      likes: [],
+      comments: []
     };
 
 
@@ -37,19 +37,28 @@ angular.module('fcws.controllers')
     // }
 
     $scope.Like = function() {
-      var username = User.getUserName();
-      var indexUser = $scope.post.likes.indexOf(username);
-      if (indexUser > -1) {
-        $scope.post.likes.splice(indexUser, 1);
-      } else {
-        $scope.post.likes.push(username);
-      }
+      $rootScope.show("Please wait... 正在点赞");
+      Post.likePost(id)
+      .success(function(response, status, headers, config) {
+          //var user_id = User.getUserId();
+          // if (response.action === 'up') {
+          //   $scope.post.likes.push(user_id);
+          // } else {
+          //   $scope.post.likes.splice(user_id, 1);
+          // }
+          $scope.loadPost();
+          $rootScope.hide();
+        })
+      .error(function(data, status, headers, config) {
+          $rootScope.hide();
+          $rootScope.notify("Oops something went wrong!! Please try again later");
+        });
     };
 
     $scope.isLike = function() {
-     //console.log(JSON.stringify($scope.post));
-      var username = User.getUserName();
-      var indexUser = $scope.post.likes.indexOf(username);
+      //console.log(JSON.stringify($scope.post));
+      var user_id = User.getUserId();
+      var indexUser = $scope.post.likes.indexOf(user_id);
       if (indexUser != -1) {
         return true;
       } else {
@@ -64,53 +73,53 @@ angular.module('fcws.controllers')
     };
 
     //delete
-    $scope.deletePost = function () {
-        $rootScope.show("Please wait... Deleting from List");
-        Post.deletePost(id)
-            .success(function (data, status, headers, config) {
-                $rootScope.hide();
-                $rootScope.$broadcast('fetchAll');
-                $state.go('sidemenu.posts');
-            }).error(function (data, status, headers, config) {
-                $rootScope.hide();
-                $rootScope.notify("Oops something went wrong!! Please try again later");
-            });
+    $scope.deletePost = function() {
+      $rootScope.show("Please wait... Deleting from List");
+      Post.deletePost(id)
+        .success(function(data, status, headers, config) {
+          $rootScope.hide();
+          $rootScope.$broadcast('fetchAll');
+          $state.go('sidemenu.posts');
+        }).error(function(data, status, headers, config) {
+          $rootScope.hide();
+          $rootScope.notify("Oops something went wrong!! Please try again later");
+        });
     };
 
-  //  modify
+    //  modify
 
-    $scope.addComment = function (comment) {
-        $rootScope.show("Please wait... Adding comment");
+    $scope.addComment = function(comment) {
+      $rootScope.show("Please wait... Adding comment");
 
-        Post.saveComment(id, comment)
-            .success(function (data, status, headers, config) {
-                $rootScope.hide();
-                $scope.post.comments.push(comment);
-                //$rootScope.$broadcast('addComment');
-            }).error(function (data, status, headers, config) {
-                $rootScope.hide();
-                $rootScope.notify("Oops something went wrong!! Please try again later");
-            });
+      Post.saveComment(id, comment)
+        .success(function(data, status, headers, config) {
+          $rootScope.hide();
+          $scope.post.comments.push(comment);
+          //$rootScope.$broadcast('addComment');
+        }).error(function(data, status, headers, config) {
+          $rootScope.hide();
+          $rootScope.notify("Oops something went wrong!! Please try again later");
+        });
     };
 
-    // A confirm dialog
-   $scope.showDeleteConfirm = function() {
-     var confirmPopup = $ionicPopup.confirm({
-       title: '确认删除？',
-       template: '您确定要删除这个情报吗?'
-     });
-     confirmPopup.then(function(res) {
-       if(res) {
-         $log.log("sure to delete a post");
-         $scope.deletePost();
-       } else {
-        $log.log('cancel delete a post');
-       }
-     });
-   };
+    // delete confirm dialog
+    $scope.showDeleteConfirm = function() {
+      var confirmPopup = $ionicPopup.confirm({
+        title: '确认删除？',
+        template: '您确定要删除这个情报吗?'
+      });
+      confirmPopup.then(function(res) {
+        if (res) {
+          $log.log("sure to delete a post");
+          $scope.deletePost();
+        } else {
+          $log.log('cancel delete a post');
+        }
+      });
+    };
 
 
-    // Triggered on a button click, or some other target
+    //make reply dialog
     $scope.makeComment = function() {
       $scope.data = {};
       // An elaborate, custom popup

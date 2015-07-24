@@ -35,7 +35,7 @@ angular.module('fcws.services')
       //TODO like a post
       likePost: function (id) {
         var token = User.getToken();
-        return $http.post(SERVER.api + '/post/'+id+'/likes',{
+        return $http.post(SERVER.api + '/post/'+id+'/likes',null,{
           method: 'POST',
           params: {
               token: token

@@ -1,4 +1,4 @@
-var pwdMgr = require('./managePasswords');
+var pwdMgr = require('../../middlewares/managePasswords');
 
 module.exports = function(server, db) {
   // unique index

@@ -19,7 +19,7 @@ angular.module('fcws.services')
           return $localstorage.get(isAuthenticatedKey);
       },
       getUserId : function () {
-          return user.id;
+          return user.id+"";
       },
       getUserName: function(){
           return user.name || "欢迎";

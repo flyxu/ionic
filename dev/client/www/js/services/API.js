@@ -46,10 +46,10 @@ angular.module('fcws.services', [])
 
         return {
             signin: function (form) {
-                return $http.post(SERVER.url+'/api/v1/auth/login', form);
+                return $http.post(SERVER.api+'/auth/login', form);
             },
             signup: function (form) {
-                return $http.post(SERVER.url+'/api/v1/auth/register', form);
+                return $http.post(SERVER.api+'/auth/register', form);
             },
           };
 });
