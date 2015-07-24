@@ -35,21 +35,19 @@ angular.module('fcws.controllers')
     //   );
     // }
 
+    // $scope.Like = function(selPost) {
+    //   var userId = User.getUserId();
+    //   var indexUser = selPost.likes.indexOf(userId);
+    //   if (indexUser > -1) {
+    //     selPost.likes.splice(indexUser, 1);
+    //   } else {
+    //     selPost.likes.push(userId);
+    //   }
+    // };
 
-
-    $scope.Like = function(index) {
-      var username = User.getUserName();
-      var indexUser = $scope.posts[index].likes.indexOf(username);
-      if (indexUser > -1) {
-        $scope.posts[index].likes.splice(indexUser, 1);
-      } else {
-        $scope.posts[index].likes.push(username);
-      }
-    };
-
-    $scope.isLike = function(index) {
-      var username = User.getUserName();
-      var indexUser = $scope.posts[index].likes.indexOf(username);
+    $scope.isLike = function(selPost) {
+      var userId = User.getUserId();
+      var indexUser = selPost.likes.indexOf(userId);
       if (indexUser != -1) {
         return true;
       } else {
