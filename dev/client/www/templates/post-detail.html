@@ -1,8 +1,10 @@
-<ion-view view-title="{{post.title}}">
+<ion-view view-title="详情">
   <ion-content>
     <div>
       <div class="item item-divider item-positive">
-        <i class="icon ion-ios-person"></i> {{post.user}}
+        <h2 class="light">{{post.title}}</h2>
+        <i class="icon ion-ios-person"></i>
+          {{post.user}}
         <span class="item-note light">
           {{post.date}}
         </span>
@@ -43,12 +45,13 @@
 </div> -->
 
   <div class="tabs tabs-positive tabs-icon-only tabs-icon-top">
-    <a class="tab-item" ng-click="showPopup()"><i class="icon ion-compose"></i>评论</a>
+    <a class="tab-item" ng-click="makeComment()"><i class="icon ion-compose"></i>评论</a>
     <a class="tab-item" ng-click="Like()">
       <i class="icon ion-ios-heart" ng-if="isLike()"></i>
       <i class="icon ion-ios-heart-outline" ng-if="!isLike()"></i>
       {{post.likes.length >0?post.likes.length: "赞" }}
     </a>
+    <a class="tab-item" ng-if="isCreater()" ng-click="showDeleteConfirm()"><i class="icon ion-trash-b"></i>删除</a>
   </div>
 
 

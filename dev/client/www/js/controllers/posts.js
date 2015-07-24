@@ -1,103 +1,97 @@
 angular.module('fcws.controllers')
-/*
-Controller for our 情报信息
-*/
-.controller('PostsCtrl', function(
-  $scope,
-  PostListService,
-  $rootScope,
-  $ionicLoading,
-  User,
-  API,
-  $log) {
-  // $scope.user = {
-  //   username: "老鹰"
-  // };
+  /*
+  Controller for our 情报信息
+  */
+  .controller('PostsCtrl', function(
+    $scope,
+    Posts,
+    $rootScope,
+    $ionicLoading,
+    User,
+    API,
+    $log) {
 
 
 
-//  $scope.posts = posts;
+    //  $scope.posts = posts;
 
-  // $rootScope.$on('newPost', function() {
-  //   $scope.posts= InfoListService.postList();
-  // });
+    // $rootScope.$on('newPost', function() {
+    //   $scope.posts= InfoListService.postList();
+    // });
 
-//   function reloadInfoList() {
-//     InfoListService.updateFromServer().then(
-//     function() {
-//       $scope.$broadcast('scroll.refreshComplete');
-//     },
-//     function(error){
-//       $scope.$broadcast('scroll.refreshComplete');
-//       //loadAppErrorHandler(error);
-//       $ionicLoading.show({
-//        template: "Unable to connect to server.<br>Status code: " + error.status,
-//        duration: 2000
-//      });
-//     }
-//   );
-// }
+    //   function reloadInfoList() {
+    //     InfoListService.updateFromServer().then(
+    //     function() {
+    //       $scope.$broadcast('scroll.refreshComplete');
+    //     },
+    //     function(error){
+    //       $scope.$broadcast('scroll.refreshComplete');
+    //       //loadAppErrorHandler(error);
+    //       $ionicLoading.show({
+    //        template: "Unable to connect to server.<br>Status code: " + error.status,
+    //        duration: 2000
+    //      });
+    //     }
+    //   );
+    // }
 
 
 
-    $scope.Like =function (index) {
-       var username = User.getUserName();
-       var indexUser = $scope.posts[index].likes.indexOf(username);
-       if (indexUser > -1) {
-          $scope.posts[index].likes.splice(indexUser, 1);
-       }else{
-          $scope.posts[index].likes.push(username);
-        }
+    $scope.Like = function(index) {
+      var username = User.getUserName();
+      var indexUser = $scope.posts[index].likes.indexOf(username);
+      if (indexUser > -1) {
+        $scope.posts[index].likes.splice(indexUser, 1);
+      } else {
+        $scope.posts[index].likes.push(username);
+      }
     };
 
-    $scope.isLike =  function (index) {
-        var username = User.getUserName();
-        var indexUser = $scope.posts[index].likes.indexOf(username);
-        if(indexUser != -1){
-          return true;
-        }else{
-          return false;
-        }
+    $scope.isLike = function(index) {
+      var username = User.getUserName();
+      var indexUser = $scope.posts[index].likes.indexOf(username);
+      if (indexUser != -1) {
+        return true;
+      } else {
+        return false;
+      }
     };
 
-    $scope.reloadPostList=function () {
+    $scope.reloadPostList = function() {
       $rootScope.$broadcast('fetchAll');
       $rootScope.$broadcast('scroll.refreshComplete');
     };
 
-  $rootScope.$on('fetchAll', function(){
-            $log.log("get fetchAll broadcast");
-            $log.log("user token: "+User.getToken());
-            PostListService.getAll(User.getToken()).success(function (data, status, headers, config) {
-            $rootScope.show("Please wait... Processing");
-            $scope.posts = [];
-            $log.log("data.length: "+ data.length);
-            for (var i = 0; i < data.length; i++) {
-              //  if (data[i].isCompleted === false) {
-                    $scope.posts.push(data[i]);
-            //    }
-            }
-            if($scope.posts.length === 0)
-            {
-                $scope.noData = true;
-            }
-            else
-            {
-                $scope.noData = false;
-            }
-            //
-            // $ionicModal.fromTemplateUrl('templates/newItem.html', function (modal) {
-            //     $scope.newTemplate = modal;
-            // });
-            //
-            // $scope.newTask = function () {
-            //     $scope.newTemplate.show();
-            // };
-            $rootScope.hide();
-        }).error(function (data, status, headers, config) {
-            $rootScope.hide();
-            $rootScope.notify("Oops something went wrong!! Please try again later");
-        });
+    $rootScope.$on('fetchAll', function() {
+      $log.log("get fetchAll broadcast");
+      $log.log("user token: " + User.getToken());
+      Posts.getAll(User.getToken()).success(function(data, status, headers, config) {
+        $rootScope.show("Please wait... Processing");
+        $scope.posts = [];
+        $log.log("data.length: " + data.length);
+        for (var i = 0; i < data.length; i++) {
+          //  if (data[i].isCompleted === false) {
+          $scope.posts.push(data[i]);
+          //    }
+        }
+        if ($scope.posts.length === 0) {
+          $scope.noData = true;
+        } else {
+          $scope.noData = false;
+        }
+        //
+        // $ionicModal.fromTemplateUrl('templates/newItem.html', function (modal) {
+        //     $scope.newTemplate = modal;
+        // });
+        //
+        // $scope.newTask = function () {
+        //     $scope.newTemplate.show();
+        // };
+        $rootScope.hide();
+      }).error(function(data, status, headers, config) {
+        $rootScope.hide();
+        $rootScope.notify("Oops something went wrong!! Please try again later");
+      });
     });
 
     $rootScope.$broadcast('fetchAll');
@@ -132,4 +126,4 @@ Controller for our 情报信息
     //         });
     // };
 
-});
+  });

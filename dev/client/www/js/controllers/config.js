@@ -1,8 +1,7 @@
 angular.module('fcws.controllers')
-.controller('ConfigCtrl', function($scope,$state) {
+.controller('ConfigCtrl', function($scope,$state,User) {
     $scope.logout = function () {
-      localStorage.clear();
-      localStorage.isAuthenticated = false;
+      User.logoutUser();
       $state.go('auth.signin');
     };
 });

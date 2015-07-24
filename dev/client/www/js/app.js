@@ -80,8 +80,8 @@ angular.module('fcws', [
         templateUrl: 'templates/home-posts.html',
         controller: 'PostsCtrl',
         // resolve: {
-        //       posts :function (PostListService) {
-        //         return PostListService.infoList();
+        //       posts :function (Posts) {
+        //         return Posts.infoList();
         //     }
         //   }
       }
@@ -177,8 +177,8 @@ angular.module('fcws', [
 
 .constant('SERVER', {
   // if using local server
-  url: 'http://localhost:9804'
+  api: 'http://localhost:9804/api/v1'
 
   // if using our public heroku server
-  //  url: 'http://nemoworks.info:9804'
+  //  url: 'http://nemoworks.info:9804/api/v1/'
 });

@@ -23,4 +23,4 @@ server.listen(process.env.PORT || 9804, function () {
 });
 
 var manageUsers = 	require('./auth/manageUser')(server, db);
-var manageLists =   require('./list/manageList')(server, db);
+var manageLists =   require('./posts/manageList')(server, db);
