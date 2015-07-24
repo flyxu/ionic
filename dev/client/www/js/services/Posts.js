@@ -1,5 +1,5 @@
 angular.module('fcws.services')
-  .factory('PostListService', function($q,$http ,SERVER,$log) {
+  .factory('Posts', function($q,$http ,SERVER,$log) {
     //var postList =  localStorage.postList;
     // if ( postList ) {
     //     try {
@@ -109,60 +109,55 @@ angular.module('fcws.services')
       // getListLength: function() {
       //   return posts.length;
       // },
-      getPost: function(post_id) {
-        console.log(post_id);
-        var dfd = $q.defer();
-        posts.forEach(function(post) {
-          if (post.id === post_id) {
-            dfd.resolve(post);
-          }
-        });
-        return dfd.promise;
-      },
+      // getPost: function(post_id) {
+      //   console.log(post_id);
+      //   var dfd = $q.defer();
+      //   posts.forEach(function(post) {
+      //     if (post.id === post_id) {
+      //       dfd.resolve(post);
+      //     }
+      //   });
+      //   return dfd.promise;
+      // },
       // addPost: function(post) {
       //   posts.splice(0, 0, post);
       //   //  return true;
       // },
+      //获取所有情报
       getAll: function(token) {
-        return $http.get(SERVER.url + '/api/v1/fcws/data/list', {
+        return $http.get(SERVER.api + '/posts', {
           method: 'GET',
           params: {
             token: token
           }
         });
       },
+      //获取一个情报
       getOne: function(id,token) {
-        return $http.get(SERVER.url+ '/api/v1/fcws/data/item/' + id, {
+        return $http.get(SERVER.api+ '/post/' + id, {
           method: 'GET',
           params: {
               token: token
           }
         });
       },
+      //新建一个情报
       saveItem: function(form,token) {
-        return $http.post(SERVER.url + '/api/v1/fcws/data/item', form, {
+        return $http.post(SERVER.api + '/post', form, {
           method: 'POST',
           params: {
               token: token
           }
         });
       },
-      putItem: function(id, form, token) {
-        return $http.put(SERVER.url + '/api/v1/fcws/data/item/' + id, form, {
-          method: 'PUT',
-          params: {
-            token: token
-          }
-        });
-      },
-      deleteItem: function(id, token) {
-        return $http.delete(SERVER.url + '/api/v1/fcws/data/item/' + id, {
-          method: 'DELETE',
-          params: {
-            token: token
-          }
-        });
-      },
+      // putItem: function(id, form, token) {
+      //   return $http.put(SERVER.api + '/post/' + id, form, {
+      //     method: 'PUT',
+      //     params: {
+      //       token: token
+      //     }
+      //   });
+      // },
     //  updateFromServer: updateFromServer,
     };
 

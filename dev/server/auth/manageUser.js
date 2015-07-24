@@ -8,7 +8,7 @@ module.exports = function(server, db) {
     unique: true
   });
 
-  server.post('/api/v1/fcws/auth/register', function(req, res, next) {
+  server.post('/api/v1/auth/register', function(req, res, next) {
     var user = req.params;
     pwdMgr.cryptPassword(user.password, function(err, hash) {
       user.password = hash;
@@ -37,7 +37,7 @@ module.exports = function(server, db) {
     return next();
   });
 
-  server.post('/api/v1/fcws/auth/login', function(req, res, next) {
+  server.post('/api/v1/auth/login', function(req, res, next) {
     var user = req.params;
     if (user.email.trim().length === 0 || user.password.trim().length === 0) {
       res.writeHead(403, {

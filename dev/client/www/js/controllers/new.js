@@ -1,5 +1,5 @@
 angular.module('fcws.controllers')
-  .controller('NewCtrl', function($scope,$rootScope,API,User,$filter,PostListService,$window) {
+  .controller('NewCtrl', function($scope,$rootScope,API,User,$filter,Posts,$window) {
       $scope.post={
         user: "",
         title: "",
@@ -18,7 +18,7 @@ angular.module('fcws.controllers')
             $rootScope.notify("Please enter valid credentials");
             return false;
           }
-          //var id = PostListService.getListLength()+1+"";
+          //var id = Posts.getListLength()+1+"";
           var user = User.getUserName();
           if(this.post.important)
             important = true;
@@ -37,7 +37,7 @@ angular.module('fcws.controllers')
                  comments:[]
             };
 
-          PostListService.saveItem(form, User.getToken())
+          Posts.saveItem(form, User.getToken())
               .success(function (data, status, headers, config) {
                   $rootScope.hide();
                   $rootScope.$broadcast('fetchAll');

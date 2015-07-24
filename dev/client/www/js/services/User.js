@@ -1,13 +1,15 @@
 angular.module('fcws.services')
-  .factory('User', function($q,$localstorage,$log) {
+  .factory('User', function($q,$localstorage,$log,$rootScope) {
     var userKey = 'user';
     var isAuthenticatedKey = 'isAuthenticated';
     var user = $localstorage.get(userKey);
     return {
       loginUser: function (id,name,email) {
-          console.log(id+" "+name+" "+email);
+          $log.log(id+" "+name+" "+email);
           $localstorage.set(userKey,{id:id,name:name,email:email});
           $localstorage.set(isAuthenticatedKey,true);
+          user = $localstorage.get(userKey);
+          $rootScope.$broadcast('login');
       },
       logoutUser: function () {
         $localstorage.remove(userKey);
