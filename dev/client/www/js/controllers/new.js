@@ -6,8 +6,8 @@ angular.module('fcws.controllers')
         content: "",
         important: "",
         date: "",
-        comments: [],
-        likes: []
+        likes: [],
+        replyCount: 0
       };
 
       $scope.createNewPost = function () {
@@ -18,23 +18,23 @@ angular.module('fcws.controllers')
             $rootScope.notify("Please enter valid credentials");
             return false;
           }
-          //var id = Posts.getListLength()+1+"";
-          var user = User.getUserName();
+
           if(this.post.important)
             important = true;
           var date = new Date();
-          var postdate = $filter('date')(date, 'yyyy-MM-dd HH:mm:ss');
+          var createDate = $filter('date')(date, 'yyyy-MM-dd HH:mm:ss');
         //  var avatar = User.getUserAvatar();
 
           var form = {
                 // id: id,
-                 user: user,
+                 userName: User.getUserName(),
+                 userId: User.getUserId(),
                  title : title,
                  content: content,
                  important: important,
-                 date:postdate,
+                 createDate:createDate,
                  likes:[],
-                 comments:[]
+                 replyCount: 0
             };
 
           Posts.saveItem(form, User.getToken())

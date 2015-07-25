@@ -45,15 +45,15 @@ angular.module('fcws.controllers')
     //   }
     // };
 
-    $scope.isLike = function(selPost) {
-      var userId = User.getUserId();
-      var indexUser = selPost.likes.indexOf(userId);
-      if (indexUser != -1) {
-        return true;
-      } else {
-        return false;
-      }
-    };
+    // $scope.isLike = function(selPost) {
+    //   var userId = User.getUserId();
+    //   var indexUser = selPost.likes.indexOf(userId);
+    //   if (indexUser != -1) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // };
 
     $scope.reloadPostList = function() {
       $rootScope.$broadcast('fetchAll');

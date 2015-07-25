@@ -1,12 +1,13 @@
 <ion-view view-title="详情">
-  <ion-content scroll="false">
+  <ion-content >
+    <ion-refresher on-refresh="reloadPost()"></ion-refresher>
     <div>
-      <div class="item item-divider item-positive">
-        <h2 class="light">{{post.title}}</h2>
+      <div class="item item-divider item-light">
+        <h2 >{{post.title}}</h2>
         <i class="icon ion-ios-person"></i>
-          {{post.user}}
-        <span class="item-note light">
-          {{post.date}}
+          {{post.userName}} <i class="positive"> 楼主</i>
+        <span class="item-note dark">
+          {{post.createDate}}
         </span>
       </div>
       <div class="item item-text-wrap">
@@ -15,15 +16,22 @@
     </div>
 
     <ion-list>
-      <div ng-repeat="comment in post.comments" class="card">
-        <div class="item item-divider item-positive">
-          {{comment.user}}
-          <span class="item-note light">
-            {{comment.date}}
-          </span>
+      <div ng-repeat="reply in post.replies" class="card">
+        <div class="item item-divider item-stable">
+            <h2>
+              <i class="icon ion-ios-person"></i>  {{reply.userName}}
+              <i class="positive" ng-if="(post.userId === reply.userId)"> 楼主</i>
+            </h2>
+            <p>{{reply.createDate}}</p>
+            <div class="item-icon-right">
+              <a ng-if="(reply.userId === userId)" ng-click="showDeleteReplyConfirm(reply)">
+                <i class="icon ion-trash-b"></i>
+              </a>
+            </div>
+
         </div>
         <div class="item item-text-wrap">
-          {{comment.content}}
+          {{reply.content}}
         </div>
       </div>
     </ion-list>
@@ -51,7 +59,7 @@
       <i class="icon ion-ios-heart-outline" ng-if="!isLike()"></i>
       {{post.likes.length >0?post.likes.length: "赞" }}
     </a>
-    <a class="tab-item" ng-if="isCreater()" ng-click="showDeleteConfirm()"><i class="icon ion-trash-b"></i>删除</a>
+    <a class="tab-item" ng-if="(userId === post.userId)" ng-click="showDeleteConfirm()"><i class="icon ion-trash-b"></i>删除</a>
   </div>
 
 

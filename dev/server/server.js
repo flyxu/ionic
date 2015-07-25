@@ -1,7 +1,7 @@
 var restify     =   require('restify');
 var mongojs     =   require('mongojs');
 var morgan  	=   require('morgan');
-var db          =   mongojs('fcws', ['appUsers','postLists','replyLists']);
+var db          =   mongojs('fcws', ['appUsers','postList','replyList']);
 var server      =   restify.createServer();
 
 

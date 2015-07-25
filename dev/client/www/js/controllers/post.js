@@ -9,20 +9,20 @@ angular.module('fcws.controllers')
       title: "",
       content: "",
       important: false,
-      avatar: "",
       date: "",
       likes: [],
-      comments: []
+      replies: []
     };
 
 
     var id = $stateParams.post_id;
+    $scope.userId = User.getUserId();
 
     $scope.loadPost = function() {
       $rootScope.show("Please wait... Processing");
       Post.getPost(id)
         .success(function(data, status, headers, config) {
-          $scope.post = data[0];
+          $scope.post = data;
           $log.log(JSON.stringify($scope.post));
           $rootScope.hide();
         })
@@ -32,6 +32,11 @@ angular.module('fcws.controllers')
         });
     };
     $scope.loadPost();
+
+    $scope.reloadPost = function () {
+        $scope.loadPost();
+        $rootScope.$broadcast('scroll.refreshComplete');
+    };
 
     // $rootScope.$on('addComment', function() {
     // }
@@ -66,13 +71,30 @@ angular.module('fcws.controllers')
       }
     };
 
-    $scope.isCreater = function() {
-      var userToken = User.getToken();
-      var postToken = $scope.post.token;
-      return (userToken == postToken);
+    // $scope.isCreater = function() {
+    //   var userToken = User.getToken();
+    //   var postToken = $scope.post.token;
+    //   return (userToken == postToken);
+    // };
+
+    //  modify
+    $scope.addReply = function(reply) {
+      $rootScope.show("Please wait... Adding reply");
+
+      Post.saveReply(id, reply)
+        .success(function(data, status, headers, config) {
+          $rootScope.hide();
+          //$scope.post.comments.push(reply);
+          //$rootScope.$broadcast('addComment');
+          $scope.loadPost();
+        }).error(function(data, status, headers, config) {
+          $rootScope.hide();
+          $rootScope.notify("Oops something went wrong!! Please try again later");
+        });
     };
 
-    //delete
+
+    //delete post
     $scope.deletePost = function() {
       $rootScope.show("Please wait... Deleting from List");
       Post.deletePost(id)
@@ -86,23 +108,24 @@ angular.module('fcws.controllers')
         });
     };
 
-    //  modify
-
-    $scope.addComment = function(comment) {
-      $rootScope.show("Please wait... Adding comment");
-
-      Post.saveComment(id, comment)
+    //delete reply
+    $scope.deleteReply = function(reply) {
+      $rootScope.show("Please wait... Deleting reply");
+      var reply_id = reply._id;
+      console.log(reply_id);
+      Post.deleteReply(reply_id,id)
         .success(function(data, status, headers, config) {
+          $scope.loadPost();
           $rootScope.hide();
-          $scope.post.comments.push(comment);
-          //$rootScope.$broadcast('addComment');
         }).error(function(data, status, headers, config) {
           $rootScope.hide();
           $rootScope.notify("Oops something went wrong!! Please try again later");
         });
     };
 
-    // delete confirm dialog
+
+
+    // delete post confirm dialog
     $scope.showDeleteConfirm = function() {
       var confirmPopup = $ionicPopup.confirm({
         title: '确认删除？',
@@ -114,6 +137,22 @@ angular.module('fcws.controllers')
           $scope.deletePost();
         } else {
           $log.log('cancel delete a post');
+        }
+      });
+    };
+
+    // delete reply confirm dialog
+    $scope.showDeleteReplyConfirm = function(reply) {
+      var confirmPopup = $ionicPopup.confirm({
+        title: '确认删除？',
+        template: '您确定要删除这条回复吗?'
+      });
+      confirmPopup.then(function(res) {
+        if (res) {
+          $log.log("sure to delete a reply");
+          $scope.deleteReply(reply);
+        } else {
+          $log.log('cancel delete a reply');
         }
       });
     };
@@ -146,11 +185,13 @@ angular.module('fcws.controllers')
         console.log('Tapped!', res);
         if (res) {
           var date = new Date();
-          var postdate = $filter('date')(date, 'yyyy-MM-dd HH:mm:ss');
-          $scope.addComment({
-            user: User.getUserName(),
+          var createDate = $filter('date')(date, 'yyyy-MM-dd HH:mm:ss');
+          $scope.addReply({
+            userId: User.getUserId(),
+            userName: User.getUserName(),
+            postId: id,
             content: res,
-            date: postdate
+            createDate: createDate
           });
         }
       });

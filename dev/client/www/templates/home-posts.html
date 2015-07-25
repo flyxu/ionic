@@ -19,22 +19,22 @@
             <i class="icon ion-ios-sunny positive" ng-if="!post.important"></i>
               {{post.title}}
           </h2>
-          <p><i class="icon ion-ios-person"></i> {{post.user}}</p>
+          <p><i class="icon ion-ios-person"></i> {{post.userName}}</p>
         </a>
 
         <div class="item tabs tabs-secondary tabs-icon-left">
-          <a class="tab-item" ">
-            <i class="icon ion-ios-heart-outline assertive" ng-if="!isLike(post)"></i>
-            <i class="icon ion-ios-heart assertive" ng-if="isLike(post)"></i>
-            {{post.likes.length >0?post.likes.length: "赞" }}
+          <a class="tab-item">
+            <!-- <i class="icon ion-ios-heart-outline assertive" ng-if="!isLike(post)"></i> -->
+            <i class="icon ion-ios-heart assertive"></i>
+            {{post.likesCount >0?post.likesCount: "赞" }}
           </a>
           <a class="tab-item ">
             <i class="icon ion-chatboxes positive"></i>
-            {{post.comments.length >0?post.comments.length:0}}
+            {{post.replyCount >0?post.replyCount:0}}
           </a>
           <a class="tab-item">
             <i class="icon ion-clock dark"></i>
-            {{post.date}}
+            {{post.createDate}}
           </a>
         </div>
       </div>
