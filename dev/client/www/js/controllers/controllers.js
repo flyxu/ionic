@@ -21,6 +21,30 @@ Controller for our 教育管理
 
 })
 
+.controller('TabsCtrl', function($scope) {
+
+})
+
+.controller('TzjhCtrl', function($scope) {
+
+})
+
+.controller('XlfgCtrl', function($scope) {
+
+})
+
+.controller('ZlcxCtrl', function($scope) {
+
+})
+
+.controller('XlkhCtrl', function($scope) {
+
+})
+
+.controller('YulanCtrl', function($scope) {
+
+})
+
 /*
 Controller for our 国防动员
 */
