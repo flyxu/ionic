@@ -1,0 +1,69 @@
+<ion-view view-title="详情">
+  <ion-content >
+    <ion-refresher on-refresh="reloadPost()"></ion-refresher>
+    <div>
+      <div class="item item-divider item-light">
+        <h2 >{{post.title}}</h2>
+        <i class="icon ion-ios-person"></i>
+          {{post.userName}} <i class="positive"> 楼主</i>
+        <span class="item-note dark">
+          {{post.createDate}}
+        </span>
+      </div>
+      <div class="item item-text-wrap">
+        {{post.content}}
+      </div>
+    </div>
+
+    <ion-list>
+      <div ng-repeat="reply in post.replies" class="card">
+        <div class="item item-divider item-stable">
+            <h2>
+              <i class="icon ion-ios-person"></i>  {{reply.userName}}
+              <i class="positive" ng-if="(post.userId === reply.userId)"> 楼主</i>
+            </h2>
+            <p>{{reply.createDate}}</p>
+            <div class="item-icon-right">
+              <a ng-if="(reply.userId === userId)" ng-click="showDeleteReplyConfirm(reply)">
+                <i class="icon ion-trash-b"></i>
+              </a>
+            </div>
+
+        </div>
+        <div class="item item-text-wrap">
+          {{reply.content}}
+        </div>
+      </div>
+    </ion-list>
+  </ion-content>
+
+
+
+  <!-- <div class="row">
+       <div class="col col-25"><button class="button">  <i class="icon ion-loading-c"></i> Loading...</button></div>
+
+
+        <div class="col col-25"><a class="button button-icon icon ion-settings"></a></div>
+
+
+       <div class="col col-25"><a class="button button-icon icon ion-settings"></a></div>
+
+
+      <div class="col col-25"><a class="button button-icon icon ion-settings"></a></div>
+</div> -->
+
+  <div class="tabs tabs-positive tabs-icon-only tabs-icon-top">
+    <a class="tab-item" ng-click="makeComment()"><i class="icon ion-compose"></i>评论</a>
+    <a class="tab-item" ng-click="Like()">
+      <i class="icon ion-ios-heart" ng-if="isLike()"></i>
+      <i class="icon ion-ios-heart-outline" ng-if="!isLike()"></i>
+      {{post.likes.length >0?post.likes.length: "赞" }}
+    </a>
+    <a class="tab-item" ng-if="(userId === post.userId)" ng-click="showDeleteConfirm()"><i class="icon ion-trash-b"></i>删除</a>
+  </div>
+
+
+
+
+
+</ion-view>

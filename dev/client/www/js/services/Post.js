@@ -21,10 +21,9 @@ angular.module('fcws.services')
         });
       },
 
-      //TODO add a comment
-      saveComment: function(id,commentData) {
+      saveReply: function(id,reply) {
         var token = User.getToken();
-        return $http.post(SERVER.api + '/post/'+id+'/comments', commentData, {
+        return $http.post(SERVER.api + '/reply', reply, {
           method: 'POST',
           params: {
               token: token
@@ -32,7 +31,17 @@ angular.module('fcws.services')
         });
       },
 
-      //TODO like a post
+      deleteReply: function(replyId,postId) {
+        var token = User.getToken();
+        return $http.delete(SERVER.api + '/reply/'+replyId, {
+          method: 'DELETE',
+          params: {
+              token: token,
+              postId: postId
+          }
+        });
+      },
+
       likePost: function (id) {
         var token = User.getToken();
         return $http.post(SERVER.api + '/post/'+id+'/likes',null,{

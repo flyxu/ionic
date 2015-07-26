@@ -29,16 +29,16 @@ angular.module('fcws', [
     .state('auth', {
       url: "/auth",
       abstract: true,
-      templateUrl: "templates/auth.html",
-      controller: "AccountCtrl"
+      templateUrl: "templates/auth/tab.html",
+      controller: "AuthTabCtrl"
     })
 
   // login page
   .state('auth.signin', {
     url: "/signin",
     views: {
-      'auth-signin': {
-        templateUrl: 'templates/auth-signin.html',
+      'signinTab': {
+        templateUrl: 'templates/auth/signin.html',
         controller: 'LogInCtrl'
       }
     }
@@ -48,8 +48,8 @@ angular.module('fcws', [
   .state('auth.signup', {
     url: '/signup',
     views: {
-      'auth-signup': {
-        templateUrl: 'templates/auth-signup.html',
+      'signupTab': {
+        templateUrl: 'templates/auth/signup.html',
         controller: 'SignUpCtrl'
       }
     }
@@ -67,7 +67,7 @@ angular.module('fcws', [
     url: '/dashboard',
     views: {
       'menuContent': {
-        templateUrl: 'templates/home-dash.html',
+        templateUrl: 'templates/dashboard/index.html',
         controller: 'DashboardCtrl',
       }
     }
@@ -77,13 +77,8 @@ angular.module('fcws', [
     url: '/posts',
     views: {
       'menuContent': {
-        templateUrl: 'templates/home-posts.html',
-        controller: 'PostsCtrl',
-        // resolve: {
-        //       posts :function (Posts) {
-        //         return Posts.infoList();
-        //     }
-        //   }
+        templateUrl: 'templates/post/list.html',
+        controller: 'PostsCtrl'
       }
     }
   })
@@ -92,7 +87,7 @@ angular.module('fcws', [
     url: '/posts/:post_id',
     views: {
       'menuContent': {
-        templateUrl: "templates/post-detail.html",
+        templateUrl: "templates/post/detail.html",
         controller: 'PostCtrl',
       }
     }
@@ -102,118 +97,108 @@ angular.module('fcws', [
     url: "/new",
     views: {
       'menuContent': {
-        templateUrl: "templates/post-new.html",
+        templateUrl: "templates/post/new.html",
         controller: 'NewCtrl'
       }
     }
   })
 
-  .state('sidemenu.zhkz', {
-    url: '/zhkz',
+  .state('sidemenu.control', {
+    url: '/control',
     views: {
       'menuContent': {
-        templateUrl: 'templates/home-zhkz.html',
-        controller: 'ZhkzCtrl'
+        templateUrl: 'templates/control/index.html',
+        controller: 'ControlCtrl'
       }
     }
   })
 
-  .state('sidemenu.jsxl', {
-    url: '/jsxl',
+  .state('sidemenu.train', {
+    url: '/train',
     views: {
       'menuContent': {
-        templateUrl: 'templates/home-jsxl.html',
-        controller: 'JsxlCtrl'
+        templateUrl: 'templates/train/tab.html',
+        controller: 'TrainCtrl'
       }
     }
   })
 
-  .state('sidemenu.jygl', {
-    url: '/jygl',
+  .state('sidemenu.train.plan', {
+    url: '/plan',
+    views: {
+      'plan': {
+        templateUrl: 'templates/train/plan.html',
+        controller: 'TrainPlanCtrl',
+      }
+    }
+  })
+
+  .state('sidemenu.train.rule', {
+    url: '/rule',
+    views: {
+      'rule': {
+        templateUrl: 'templates/train/rule.html',
+        controller: 'TrainRuleCtrl',
+      }
+    }
+  })
+
+  .state('sidemenu.train.search', {
+    url: '/search',
+    views: {
+      'search': {
+        templateUrl: 'templates/train/search.html',
+        controller: 'TrainSearchCtrl',
+      }
+    }
+  })
+
+  .state('sidemenu.train.exam', {
+    url: '/exam',
+    views: {
+      'exam': {
+        templateUrl: 'templates/train/exam.html',
+        controller: 'TrainExamCtrl',
+      }
+    }
+  })
+
+  .state('sidemenu.doc', {
+    url: '/doc/:url',
     views: {
       'menuContent': {
-        templateUrl: 'templates/home-jygl.html',
-        controller: 'JyglCtrl'
+          templateUrl: "templates/doc.html",
+          controller: 'DocCtrl',
+        }
       }
-    }
   })
 
-
-
-  .state('sidemenu.gfdy', {
-    url: '/gfdy',
+  .state('sidemenu.education', {
+    url: '/education',
     views: {
       'menuContent': {
-        templateUrl: 'templates/home-gfdy.html',
-        controller: 'GfdyCtrl',
+        templateUrl: 'templates/education/index.html',
+        controller: 'EducationCtrl'
       }
     }
   })
 
-  .state('sidemenu.tabs', {
-    url: '/tabs',
+  .state('sidemenu.defence', {
+    url: '/defence',
     views: {
       'menuContent': {
-        templateUrl: 'templates/tabs.html',
-        controller: 'TabsCtrl',
+        templateUrl: 'templates/defence/index.html',
+        controller: 'DefenceCtrl',
       }
     }
   })
 
-  .state('sidemenu.tabs.tzjh', {
-    url: '/tzjh',
-    views: {
-      'tzjh': {
-        templateUrl: 'templates/tzjh.html',
-        controller: 'TzjhCtrl',
-      }
-    }
-  })
-
-  .state('sidemenu.tabs.xlfg', {
-    url: '/xlfg',
-    views: {
-      'xlfg': {
-        templateUrl: 'templates/xlfg.html',
-        controller: 'XlfgCtrl',
-      }
-    }
-  })
-
-  .state('sidemenu.tabs.zlcx', {
-    url: '/zlcx',
-    views: {
-      'zlcx': {
-        templateUrl: 'templates/zlcx.html',
-        controller: 'ZlcxCtrl',
-      }
-    }
-  })
-
-  .state('yulan', {
-    url: "/yulan",
-    templateUrl: "templates/yulan.html",
-    controller: 'YulanCtrl',
-  })
-
-
-  .state('sidemenu.tabs.xlkh', {
-    url: '/xlkh',
-    views: {
-      'xlkh': {
-        templateUrl: 'templates/xlkh.html',
-        controller: 'XlkhCtrl',
-      }
-    }
-  })
-
-
-  .state('sidemenu.txl', {
-    url: '/txl',
+  .state('sidemenu.contact', {
+    url: '/contact',
     views: {
       'menuContent': {
-        templateUrl: 'templates/home-txl.html',
-        controller: 'TxlCtrl',
+        templateUrl: 'templates/contact/index.html',
+        controller: 'ContactCtrl',
       }
     }
   })
@@ -222,11 +207,13 @@ angular.module('fcws', [
     url: '/config',
     views: {
       'menuContent': {
-        templateUrl: 'templates/home-config.html',
+        templateUrl: 'templates/config.html',
         controller: 'ConfigCtrl',
       }
     }
   });
+
+
 
 
 
@@ -237,7 +224,8 @@ angular.module('fcws', [
 
 .constant('SERVER', {
   // if using local server
-  api: 'http://localhost:9804/api/v1'
+  api: 'http://localhost:9804/api/v1',
+  docs:'http://localhost:9804/docs'
 
   // if using our public heroku server
   //  url: 'http://nemoworks.info:9804/api/v1/'
