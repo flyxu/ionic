@@ -4,11 +4,14 @@ var morgan  	=   require('morgan');
 var db          =   mongojs('fcws', ['appUsers','postList','replyList']);
 var server      =   restify.createServer();
 
-
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.use(morgan('dev')); // LOGGER
+server.get(/\/docs\/?.*/, restify.serveStatic({
+  directory: './documentation/v1',
+  default: 'index.html'
+}));
 
 // CORS
 server.use(function(req, res, next) {

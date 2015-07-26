@@ -4,7 +4,7 @@ module.exports = function(server, db) {
   server.get("/api/v1/posts", function(req, res, next) {
     validateRequest.validate(req, res, db, function() {
       db.postList.find({}, function(err, list) {
-        console.log(list);
+        //console.log(list);
         for(var i=0,l=list.length;i<l;i++){
           var post = list[i];
           post.likesCount = post.likes.length;
