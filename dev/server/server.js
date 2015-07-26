@@ -8,10 +8,7 @@ server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.use(morgan('dev')); // LOGGER
-server.get(/\/docs\/?.*/, restify.serveStatic({
-  directory: './documentation/v1',
-  default: 'index.html'
-}));
+
 
 // CORS
 server.use(function(req, res, next) {
@@ -20,6 +17,11 @@ server.use(function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
+
+server.get(/\/docs\/?.*/, restify.serveStatic({
+  directory: './documentation/v1',
+  default: 'index.html'
+}));
 
 server.listen(process.env.PORT || 9804, function () {
     console.log("Server started @ ",process.env.PORT || 9804);
