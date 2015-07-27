@@ -6,9 +6,10 @@
 
     <div class="list">
       <div ng-repeat="doc in docs">
-        <a class="item item-icon-left" ui-sref='sidemenu.doc({url: doc.url})'>
+        <a class="item item-icon-left item-icon-right" ng-click="showDoc(doc)">
             <i class="icon ion-clipboard"></i>
             {{doc.name}}
+            <i class="icon ion-ios-arrow-right"></i>
         </a>
       </div>
     </div>

@@ -1,5 +1,5 @@
 angular.module('fcws.controllers')
-.controller('TrainRuleCtrl', function($scope) {
+.controller('TrainRuleCtrl', function($scope,PreviewService) {
   $scope.docs = [
     {
       name: "最高人民法院关于审理破坏公用电信设施刑事案件具体应用法律若干问题的解释",
@@ -23,11 +23,20 @@ angular.module('fcws.controllers')
     },
     {
       name: "我国学生军事训练有关法律法规及重要文件节录",
-      url: "train\/rules\/center-protect-rule.html"
+      url: "train\/rules\/student-train-important.html"
     },
     {
       name: "国务院、中央军委关于保护通信线路的规定",
-      url: "train\/rules\/top-public-method.html"
+      url: "train\/rules\/center-protect-rule.html"
     }
   ];
+
+  $scope.showDoc = function(doc) {
+      $scope.selectedDoc = doc;
+      PreviewService
+        .init('templates/docModal.html', $scope)
+        .then(function(modal) {
+          modal.show();
+        });
+    };
 });
