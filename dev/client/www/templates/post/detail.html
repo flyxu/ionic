@@ -1,4 +1,10 @@
 <ion-view view-title="详情">
+  <ion-nav-buttons side="right">
+
+    <a class="button button-clear" ng-if="(userId === post.userId)" ng-click="showDeleteConfirm()">
+      <i class="icon ion-trash-b"></i>
+    </a>
+  </ion-nav-buttons>
   <ion-content >
     <ion-refresher on-refresh="reloadPost()"></ion-refresher>
     <div>
@@ -59,7 +65,6 @@
       <i class="icon ion-ios-heart-outline" ng-if="!isLike()"></i>
       {{post.likes.length >0?post.likes.length: "赞" }}
     </a>
-    <a class="tab-item" ng-if="(userId === post.userId)" ng-click="showDeleteConfirm()"><i class="icon ion-trash-b"></i>删除</a>
   </div>
 
 
