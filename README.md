@@ -1,20 +1,23 @@
-Zlyc App
-============
+# Zlyc App
+
+
 The app is a app implemented with ionic.Here a user can register and login, then he can access the info .
 
-##Front Point
+## Front Point
+
 Front end is implemented with ionic.
 
 ---
 
-##End Point
-End Point is implemented with nodejs,express and mongodb.
+## End Point
+
+End Point is implemented with nodejs,restify and mongodb.
 
 
 ---
 
 
-##How to preview the app
+## How to preview the app
 
 Download the ionic view app from the links following:
 
