@@ -4,105 +4,233 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-angular.module('zlyc', ['ionic', 'zlyc.controllers'])
+angular.module('fcws', [
+  'ionic',
+  'fcws.controllers',
+  'fcws.services',
+  'fcws.utils'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
+    if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
-    if(window.StatusBar) {
+    if (window.StatusBar) {
       StatusBar.styleDefault();
     }
   });
 })
 
-.config(function($stateProvider,$urlRouterProvider){
+.config(function($stateProvider, $urlRouterProvider) {
 
-$stateProvider
+  $stateProvider
     .state('auth', {
-        url: "/auth",
-        abstract: true,
-        templateUrl: "templates/auth.html"
+      url: "/auth",
+      abstract: true,
+      templateUrl: "templates/auth/tab.html",
+      controller: "AuthTabCtrl"
     })
 
-    // login page
-    .state('auth.signin', {
-        url: "/signin",
-        views: {
-            'auth-signin': {
-                templateUrl: 'templates/auth-signin.html',
-                controller: 'SignInCtrl'
-            }
-        }
-    })
-
-    // signup page
-    .state('auth.signup', {
-      url: '/signup',
-      views: {
-          'auth-signup': {
-              templateUrl: 'templates/auth-signup.html',
-              controller: 'SignUpCtrl'
-          }
+  // login page
+  .state('auth.signin', {
+    url: "/signin",
+    views: {
+      'signinTab': {
+        templateUrl: 'templates/auth/signin.html',
+        controller: 'LogInCtrl'
       }
-    })
+    }
+  })
 
-    .state('home',{
-      url: '/home',
-      abstrct : true,
-      templateUrl: 'templates/home.html',
-      controller: 'HomeCtrl',
-    })
+  // signup page
+  .state('auth.signup', {
+    url: '/signup',
+    views: {
+      'signupTab': {
+        templateUrl: 'templates/auth/signup.html',
+        controller: 'SignUpCtrl'
+      }
+    }
+  })
 
-    .state('qbxx',{
-      url: '/qbxx',
-      templateUrl: 'templates/qbxx.html',
-      controller: 'QbxxCtrl'
 
-    })
+  .state('sidemenu', {
+    url: '/sidemenu',
+    abstract: true,
+    templateUrl: 'templates/sidemenu.html',
+    controller: 'SidemenuCtrl',
+  })
 
-    .state('zhkz',{
-      url: '/zhkz',
-      templateUrl: 'templates/zhkz.html',
-      controller: 'ZhkzCtrl'
-    })
+  .state('sidemenu.dashboard', {
+    url: '/dashboard',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/dashboard/index.html',
+        controller: 'DashboardCtrl',
+      }
+    }
+  })
 
-    .state('jsxl',{
-      url: '/jsxl',
-      templateUrl: 'templates/jsxl.html',
-      controller: 'JsxlCtrl'
-    })
+  .state('sidemenu.posts', {
+    url: '/posts',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/post/list.html',
+        controller: 'PostsCtrl'
+      }
+    }
+  })
 
-     .state('jygl',{
-      url: '/jygl',
-      templateUrl: 'templates/jygl.html',
-      controller: 'JyglCtrl'
-    })
+  .state('sidemenu.post', {
+    url: '/posts/:post_id',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/post/detail.html",
+        controller: 'PostCtrl',
+      }
+    }
+  })
 
-    .state('gfdy',{
-      url: '/gfdy',
-      templateUrl: 'templates/gfdy.html',
-      controller: 'GfdyCtrl'
-    })
+  .state('sidemenu.new', {
+    url: "/new",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/post/new.html",
+        controller: 'NewCtrl'
+      }
+    }
+  })
 
-    .state('txl',{
-      url: '/txl',
-      templateUrl: 'templates/txl.html',
-      controller: 'TxlCtrl'
-    })
+  .state('sidemenu.control', {
+    url: '/control',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/control/index.html',
+        controller: 'ControlCtrl'
+      }
+    }
+  })
+
+  .state('sidemenu.train', {
+    url: '/train',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/train/tab.html',
+        controller: 'TrainCtrl'
+      }
+    }
+  })
+
+  .state('sidemenu.train.plan', {
+    url: '/plan',
+    views: {
+      'plan': {
+        templateUrl: 'templates/train/plan.html',
+        controller: 'TrainPlanCtrl',
+      }
+    }
+  })
+
+  .state('sidemenu.train.rule', {
+    url: '/rule',
+    views: {
+      'rule': {
+        templateUrl: 'templates/train/rule.html',
+        controller: 'TrainRuleCtrl',
+      }
+    }
+  })
+
+  .state('sidemenu.train.search', {
+    url: '/search',
+    views: {
+      'search': {
+        templateUrl: 'templates/train/search.html',
+        controller: 'TrainSearchCtrl',
+      }
+    }
+  })
+
+  .state('sidemenu.train.exam', {
+    url: '/exam',
+    views: {
+      'exam': {
+        templateUrl: 'templates/train/exam.html',
+        controller: 'TrainExamCtrl',
+      }
+    }
+  })
+
+  // .state('sidemenu.doc', {
+  //   url: '/doc/:url',
+  //   views: {
+  //     'menuContent': {
+  //         templateUrl: "templates/doc.html",
+  //         controller: 'DocCtrl',
+  //       }
+  //     }
+  // })
+
+  .state('sidemenu.education', {
+    url: '/education',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/education/index.html',
+        controller: 'EducationCtrl'
+      }
+    }
+  })
+
+  .state('sidemenu.defence', {
+    url: '/defence',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/defence/index.html',
+        controller: 'DefenceCtrl',
+      }
+    }
+  })
+
+  .state('sidemenu.contact', {
+    url: '/contact',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/contact/index.html',
+        controller: 'ContactCtrl',
+      }
+    }
+  })
+
+  .state('sidemenu.config', {
+    url: '/config',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/config.html',
+        controller: 'ConfigCtrl',
+      }
+    }
+  });
+
+
+
+
+
 
   $urlRouterProvider.otherwise('/auth/signin');
 
 })
 
 .constant('SERVER', {
-    // if using local server
-  //url: 'http://localhost:3000'
+  // if using local server
+  // api: 'http://localhost:9804/api/v1',
+  // docs:'http://localhost:9804/docs'
+
+  api: 'http://114.212.83.116:9804/api/v1',
+  docs:'http://114.212.83.116:9804/docs'
+
 
   // if using our public heroku server
-  url: 'http://192.168.1.120:9804'
+  //  url: 'http://nemoworks.info:9804/api/v1/'
 });
-

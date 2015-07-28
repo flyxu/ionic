@@ -1,0 +1,76 @@
+<ion-view view-title="设置">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <ul class="list">
+
+      <li class="item item-toggle">
+        选项一
+        <label class="toggle toggle-positive">
+          <input type="checkbox">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+
+      <li class="item item-toggle">
+        选项二
+        <label class="toggle toggle-positive">
+          <input type="checkbox">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+
+
+      <li class="item item-toggle">
+        选项三
+        <label class="toggle toggle-positive">
+          <input type="checkbox">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+
+
+      <li class="item item-toggle">
+        选项四
+        <label class="toggle toggle-positive">
+          <input type="checkbox">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+
+      <li class="item range range-positive">
+        <div class="input-label">
+          LightVolume
+        </div>
+        <i class="icon ion-ios-sunny-outline"></i>
+        <input type="range" name="volume" min="0" max="100" value="33">
+        <i class="icon ion-ios-sunny"></i>
+      </li>
+
+      <li class="item item-input item-select">
+        <div class="input-label">
+          Lightsaber
+        </div>
+        <select>
+          <option>Blue</option>
+          <option selected>Green</option>
+          <option>Red</option>
+        </select>
+      </li>
+    </ul>
+    <div class="padding">
+    <button class="button button-block button-balanced" ng-click="logout()">
+        登出
+    </button>
+  </div>
+  </ion-content>
+</ion-view>

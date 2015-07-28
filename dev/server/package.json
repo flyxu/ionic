@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A REST server for zlyc app",
   "main": "server.js",
+  "private" :true,
   "scripts": {
     "test": "node server.js"
   },
