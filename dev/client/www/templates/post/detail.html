@@ -1,68 +1,63 @@
 <ion-view view-title="详情">
   <ion-nav-buttons side="right">
 
-    <a class="button button-clear" ng-if="(userId === post.userId)" ng-click="showDeleteConfirm()">
+    <a class="button button-clear" ng-if="(userId === post.userId)" ng-click="showDeletePostConfirm()">
       <i class="icon ion-trash-b"></i>
     </a>
   </ion-nav-buttons>
   <ion-content >
     <ion-refresher on-refresh="reloadPost()"></ion-refresher>
-    <div>
-      <div class="item item-divider item-light">
-        <h2 >{{post.title}}</h2>
-        <i class="icon ion-ios-person"></i>
-          {{post.userName}} <i class="positive"> 楼主</i>
-        <span class="item-note dark">
-          {{post.createDate}}
-        </span>
-      </div>
-      <div class="item item-text-wrap">
-        {{post.content}}
+    <div class="row post">
+      <div class="col col90">
+        <h4 class="title">{{post.title}}</h4>
+        <div class="summary">
+          <strong>
+            <a href="#/user/{{post.userName}}">
+              <img ng-src="img/avatar.jpg" class="avatar">
+              {{post.userName}}
+            </a>
+          </strong>
+          <!-- <span class="item-note" am-time-ago="topic.last_reply_at"></span> -->
+          <span class="item-note" >3小时前</span>
+        </div>
+        <div class="topic-content" ng-bind-html="post.content">
+        </div>
       </div>
     </div>
 
-    <ion-list>
-      <div ng-repeat="reply in post.replies" class="card">
-        <div class="item item-divider item-stable">
-            <h2>
-              <i class="icon ion-ios-person"></i>  {{reply.userName}}
-              <i class="positive" ng-if="(post.userId === reply.userId)"> 楼主</i>
-            </h2>
-            <p>{{reply.createDate}}</p>
-            <div class="item-icon-right">
-              <a ng-if="(reply.userId === userId)" ng-click="showDeleteReplyConfirm(reply)">
-                <i class="icon ion-trash-b"></i>
-              </a>
-            </div>
-        </div>
-        <div class="item item-text-wrap">
-          {{reply.content}}
-        </div>
-      </div>
+    <ion-list class="replies">
+      <ion-item ng-if="post.replies.length === 0">
+        暂无评论
+      </ion-item>
+      <ion-item class="item-avatar" ng-repeat="reply in post.replies" ng-click="showActions(reply)">
+        <img ng-src="img/avatar.jpg" >
+        <p>
+          <a href="#/user/{{reply.userName}}" ng-class="{'bold': reply.userId === userId}">
+            {{reply.userName}}
+          </a>
+          <span class="item-note" >1小时前
+          </span>
+        </p>
+        <div class="reply-content" ng-bind-html="reply.content"></div>
+      </ion-item>
     </ion-list>
   </ion-content>
 
-  <div class="tabs tabs-positive tabs-icon-only tabs-icon-top">
+  <!-- <div class="tabs tabs-positive tabs-icon-only tabs-icon-top">
     <a class="tab-item" ng-click="makeComment()"><i class="icon ion-compose"></i>评论</a>
-    <a class="tab-item" ng-click="Like()">
-      <i class="icon ion-ios-heart" ng-if="isLike()"></i>
-      <i class="icon ion-ios-heart-outline" ng-if="!isLike()"></i>
-      {{post.likes.length >0?post.likes.length: "赞" }}
-    </a>
-  </div>
 
-  <!-- <ion-footer-bar  class="bar-light item item-input-inset" keyboard-attach>
+  </div> -->
+
+  <ion-footer-bar  class="bar-light item item-input-inset" keyboard-attach>
+    <a class="button button-clear" ng-click="Like()">
+      <i class="icon ion-ios-heart assertive" ng-if="isLike()"></i>
+      <i class="icon ion-ios-heart-outline assertive" ng-if="!isLike()"></i>
+    </a>
     <label class="item-input-wrapper">
       <input type="text" placeholder="回复" ng-model="replyData.content" >
     </label>
-    <button class="button button-small button-clear button-positive" ng-click="saveReply()">
+    <button class="button button-small button-clear button-positive" ng-click="addReply()">
       提交
     </button>
-  </ion-footer-bar> -->
-</div>
-
-
-
-
-
+  </ion-footer-bar>
 </ion-view>
