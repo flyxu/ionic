@@ -26,3 +26,40 @@
 .posts .content .card .item.important{
     border-top: 4px solid #d2173e;
   }
+
+  .post .title {
+    margin: 0;
+  }
+.post .summary {
+    margin: 8px 0;
+  }
+
+.post .avatar {
+    width: 16px;
+    border-radius: 8px;
+    vertical-align: middle;
+  }
+
+.replies .item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  white-space: normal;
+}
+
+.replies .reply-content img {
+  max-width: 100%;
+}
+
+.replies .reply-content p {
+  overflow: visible !important;
+  white-space: normal !important;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+a {
+  color: #08c;
+  text-decoration: none;
+}
