@@ -93,16 +93,6 @@ angular.module('fcws', [
     }
   })
 
-  .state('sidemenu.new', {
-    url: "/new",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/post/new.html",
-        controller: 'NewCtrl'
-      }
-    }
-  })
-
   .state('sidemenu.control', {
     url: '/control',
     views: {

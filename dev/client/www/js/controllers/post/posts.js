@@ -9,7 +9,69 @@ angular.module('fcws.controllers')
     $ionicLoading,
     User,
     API,
-    $log) {
+    $log,
+    $ionicModal,
+    $filter) {
+
+    $scope.post = {
+      title: '',
+      content: ''
+    };
+
+    // Create the new topic modal that we will use later
+    $ionicModal.fromTemplateUrl('templates/post/newModal.html', {
+      animation: 'slide-in-up',
+      scope: $scope
+    }).then(function(modal) {
+      $scope.newPostModal = modal;
+    });
+
+    // show new topic modal
+    $scope.showNewPostModal = function() {
+      $scope.newPostModal.show();
+    };
+    $scope.closeNewPostModal = function() {
+      $scope.newPostModal.hide();
+    };
+
+    $scope.createNewPost = function() {
+      var title = $scope.post.title;
+      var content = $scope.post.content;
+      var important = false;
+      if (!title || !content) {
+        $rootScope.notify("Please enter valid credentials");
+        return false;
+      }
+
+      if (this.post.important)
+        important = true;
+      var date = new Date();
+      var createDate = $filter('date')(date, 'yyyy-MM-dd HH:mm:ss');
+      //  var avatar = User.getUserAvatar();
+
+      var form = {
+        // id: id,
+        userName: User.getUserName(),
+        userId: User.getUserId(),
+        title: title,
+        content: content,
+        important: important,
+        createDate: createDate,
+        likes: [],
+        replyCount: 0
+      };
+
+      Posts.saveItem(form, User.getToken())
+        .success(function(data, status, headers, config) {
+          $rootScope.hide();
+          $rootScope.$broadcast('fetchAll');
+          $scope.newPostModal.hide();
+        })
+        .error(function(data, status, headers, config) {
+          $rootScope.hide();
+          $rootScope.notify("网络连接出错");
+        });
+    };
 
 
 
@@ -77,14 +139,6 @@ angular.module('fcws.controllers')
         } else {
           $scope.noData = false;
         }
-        //
-        // $ionicModal.fromTemplateUrl('templates/newItem.html', function (modal) {
-        //     $scope.newTemplate = modal;
-        // });
-        //
-        // $scope.newTask = function () {
-        //     $scope.newTemplate.show();
-        // };
         $rootScope.hide();
       }).error(function(data, status, headers, config) {
         $rootScope.hide();
