@@ -1,5 +1,5 @@
 angular.module('fcws.controllers')
-.controller('TrainPlanCtrl', function($scope,PreviewService) {
+.controller('TrainPlanCtrl', function($scope,PreviewService,$rootScope,Docs) {
     $scope.docs = [
       {
         name: "训练通知",
@@ -12,11 +12,23 @@ angular.module('fcws.controllers')
     ];
 
     $scope.showDoc = function(doc) {
-        $scope.selectedDoc = doc;
-        PreviewService
-          .init('templates/docModal.html', $scope)
-          .then(function(modal) {
-            modal.show();
-          });
+        $rootScope.show("正在从服务器获取数据");
+        Docs.getDocData(doc)
+        .success(function(data,status, headers, config) {
+          $scope.docHtml= data;
+          //  console.log($scope.docHtml);
+          $rootScope.hide();
+          PreviewService
+            .init('templates/docModal.html', $scope)
+            .then(function(modal) {
+              modal.show();
+            });
+        })
+        .error(function(data, status, headers, config) {
+          console.log("error: "+ status+" " +data);
+          $rootScope.hide();
+          $rootScope.notify("额，貌似出错了");
+        });
+
       };
 });
