@@ -224,8 +224,12 @@ angular.module('fcws', [
 
 .constant('SERVER', {
   // if using local server
-  api: 'http://localhost:9804/api/v1',
-  docs:'http://localhost:9804/docs'
+  // api: 'http://localhost:9804/api/v1',
+  // docs:'http://localhost:9804/docs'
+
+  api: 'http://114.212.83.116:9804/api/v1',
+  docs:'http://114.212.83.116:9804/docs'
+
 
   // if using our public heroku server
   //  url: 'http://nemoworks.info:9804/api/v1/'
