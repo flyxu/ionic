@@ -163,15 +163,15 @@ angular.module('fcws', [
     }
   })
 
-  .state('sidemenu.doc', {
-    url: '/doc/:url',
-    views: {
-      'menuContent': {
-          templateUrl: "templates/doc.html",
-          controller: 'DocCtrl',
-        }
-      }
-  })
+  // .state('sidemenu.doc', {
+  //   url: '/doc/:url',
+  //   views: {
+  //     'menuContent': {
+  //         templateUrl: "templates/doc.html",
+  //         controller: 'DocCtrl',
+  //       }
+  //     }
+  // })
 
   .state('sidemenu.education', {
     url: '/education',

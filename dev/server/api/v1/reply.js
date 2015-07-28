@@ -59,7 +59,6 @@ module.exports = function(server, db) {
         //   });
         // res.end(JSON.stringify(data));
 
-        console.log("get here1");
 
         //update post replyCount
         db.postList.findOne({
@@ -68,13 +67,9 @@ module.exports = function(server, db) {
           if(err){
             next(err);
           }
-          console.log("get here2");
-          console.log(post);
           post.replyCount--;
-          console.log("get here3");
           //save post
           db.postList.save(post, function(err, data) {
-            console.log("get here4");
             if(err){
               next(err);
             }
