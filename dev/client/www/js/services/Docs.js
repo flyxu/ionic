@@ -1,10 +1,16 @@
 angular.module('fcws.services')
-  .factory('Docs', function($http,SERVER) {
+  .factory('Docs', function($http,SERVER,$rootScope,API) {
       return {
-        getDocData: function(url) {
+        getDocDataFromServer: function(url) {
           var docUrl = SERVER.docs+ '/' + url;
           console.log(docUrl);
           return $http.get(docUrl);
+        },
+        getDocData: function (selectedDoc) {
+          // get data
+          var url = selectedDoc.url;
+          console.log(url);
+          return this.getDocDataFromServer(url);
         }
       };
   });
