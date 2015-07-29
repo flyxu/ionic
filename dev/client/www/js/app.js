@@ -8,10 +8,16 @@ angular.module('fcws', [
   'ionic',
   'fcws.controllers',
   'fcws.services',
-  'fcws.utils'])
+  'fcws.utils',
+  'angularMoment'
+])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,amMoment) {
+  // change language to zh-cn
+  amMoment.changeLocale('zh-cn');
+
   $ionicPlatform.ready(function() {
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {
