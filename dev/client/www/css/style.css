@@ -20,11 +20,11 @@
 }
 
 .posts .content  .card .item{
-    border-top: 4px solid #4f8ef7;
+    border-top: 2px solid #4f8ef7;
 }
 
 .posts .content .card .item.important{
-    border-top: 4px solid #d2173e;
+    border-top: 2px solid #d2173e;
   }
 
   .post .title {
@@ -62,4 +62,8 @@
 a {
   color: #08c;
   text-decoration: none;
+}
+
+.reply-new input {
+  background: transparent;
 }
