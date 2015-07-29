@@ -18,7 +18,7 @@
             </a>
           </strong>
           <!-- <span class="item-note" am-time-ago="topic.last_reply_at"></span> -->
-          <span class="item-note" >3小时前</span>
+          <span class="item-note" am-time-ago="post.createDate"></span>
         </div>
         <div class="topic-content" ng-bind-html="post.content">
         </div>
@@ -35,7 +35,7 @@
           <a href="#/user/{{reply.userName}}" ng-class="{'bold': reply.userId === userId}">
             {{reply.userName}}
           </a>
-          <span class="item-note" >1小时前
+          <span class="item-note" am-time-ago="reply.createDate">
           </span>
         </p>
         <div class="reply-content" ng-bind-html="reply.content"></div>
