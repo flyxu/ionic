@@ -29,10 +29,10 @@
       <ion-item ng-if="post.replies.length === 0">
         暂无评论
       </ion-item>
-      <ion-item class="item-avatar" ng-repeat="reply in post.replies" ng-click="showActions(reply)">
+      <ion-item class="item-avatar" ng-repeat="reply in post.replies" on-hold="showActions(reply)">
         <img ng-src="img/avatar.jpg" >
         <p>
-          <a href="#/user/{{reply.userName}}" ng-class="{'bold': reply.userId === userId}">
+          <a href="#/user/{{reply.userName}}" ng-class="{'bold': reply.userId === post.userId}">
             {{reply.userName}}
           </a>
           <span class="item-note" am-time-ago="reply.createDate">
@@ -48,7 +48,7 @@
 
   </div> -->
 
-  <ion-footer-bar  class="bar-light item item-input-inset" keyboard-attach>
+  <ion-footer-bar  class="bar-light item item-input-inset reply-new" keyboard-attach>
     <a class="button button-clear" ng-click="Like()">
       <i class="icon ion-ios-heart assertive" ng-if="isLike()"></i>
       <i class="icon ion-ios-heart-outline assertive" ng-if="!isLike()"></i>

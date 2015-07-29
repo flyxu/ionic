@@ -1,6 +1,6 @@
 angular.module('fcws.controllers')
   .controller('PostCtrl', function($scope, Posts, $ionicPopup, User, $filter, $stateParams,
-    $rootScope, API, $log, Post, $state) {
+    $rootScope, API, $log, Post, $state,$ionicActionSheet,$timeout) {
     //force angular to create post object
     $scope.post = {
       id: "",
@@ -171,6 +171,39 @@ angular.module('fcws.controllers')
         }
       });
     };
+
+    $scope.showActions = function (reply) {
+
+        var title = "@"+ reply.userName;
+        var DeleteButton = ($scope.post.userId === reply.userId?"删除":"");
+       // Show the action sheet
+         var hideSheet = $ionicActionSheet.show({
+           buttons: [
+             { text: "回复" },
+           ],
+           destructiveText: DeleteButton,
+           titleText: title,
+           cancelText: '取消',
+           cancel: function() {
+           },
+          destructiveButtonClicked: function () {
+            $log.log("get here");
+            $scope.showDeleteReplyConfirm(reply);
+            return true;
+          },
+           buttonClicked: function(index) {
+             if(index === 0){
+                $scope.replyData.content = title+" ";
+                $timeout(function() {
+                  document.querySelector('.reply-new input').focus();
+                }, 1);
+             }
+             return true;
+           }
+         });
+      };
+
+
 
 
     //make reply dialog
