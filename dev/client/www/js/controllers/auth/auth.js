@@ -1,4 +1,4 @@
-angular.module('fcws.controllers', ['ionic', 'fcws.services'])
+angular.module('fcws.controllers')
 .controller('AuthTabCtrl', function($state,User,$log) {
 
     if ( User.isAuthenticated() === true ) {
