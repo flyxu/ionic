@@ -217,7 +217,6 @@ angular.module('fcws', [
   $urlRouterProvider.otherwise('/auth/signin');
 
 })
-
 .constant('SERVER', {
   // if using local server
   api: 'http://localhost:9804/api/v1',
@@ -230,3 +229,7 @@ angular.module('fcws', [
   // if using our public heroku server
   //  url: 'http://nemoworks.info:9804/api/v1/'
 });
+
+angular.module('fcws.controllers',['ionic', 'fcws.services']);
+
+angular.module('fcws.services', []);
