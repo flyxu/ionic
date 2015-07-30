@@ -3,7 +3,7 @@ angular.module('fcws.controllers')
   Controller for our 情报信息
   */
   .controller('PostsCtrl', function($scope,Posts,$rootScope,$ionicLoading,
-    User,API,$log,$ionicModal,$filter,Camera) {
+    User,API,$log,$ionicModal,$filter,Camera,$cordovaImagePicker,$ionicActionSheet) {
 
     $scope.newPost = {
       title: '',
@@ -11,62 +11,13 @@ angular.module('fcws.controllers')
       images:[]
     };
 
-    // Create the new topic modal that we will use later
+    // Create the new  post modal
     $ionicModal.fromTemplateUrl('templates/post/newModal.html', {
       animation: 'slide-in-up',
       scope: $scope
     }).then(function(modal) {
       $scope.newPostModal = modal;
     });
-
-
-    $ionicModal.fromTemplateUrl('templates/imageModal.html', {
-         scope: $scope,
-         animation: 'slide-in-up'
-       }).then(function(modal) {
-         $scope.imageModel = modal;
-       });
-
-       $scope.showImageModal = function(url) {
-          //alert("gethere");
-         $scope.imageSrc = url;
-         $scope.imageModel.show();
-       };
-
-       $scope.closeImageModal = function() {
-         $scope.imageModel.hide();
-       };
-
-    $scope.images = [];
-    // $scope.getPhoto = function() {
-    //   if($scope.images.length >=3){
-    //     alert("最多上传三张图片");
-    //     return ;
-    //   }
-    //   var imageURI= "img/avatar.jpg";
-    //   $scope.images.push({url:imageURI});
-    // };
-    $scope.removePhoto = function(image) {
-        $log.log("removePhoto");
-        var indexImage = $scope.images.indexOf(image);
-        if (indexImage > -1) {
-          $scope.images.splice(indexImage, 1);
-        }
-    };
-
-    $scope.getPhoto = function() {
-      if($scope.images.length >=3){
-        alert("最多上传三张图片");
-        return ;
-      }
-      Camera.getPicture().then(function(imageURI) {
-        console.log(imageURI);
-        $scope.images.push({url:imageURI});
-      }, function(err) {
-        console.err(err);
-        $rootScope.notify("出错了，重试一下");
-      });
-    };
 
     // show new topic modal
     $scope.showNewPostModal = function() {
@@ -116,48 +67,112 @@ angular.module('fcws.controllers')
     };
 
 
+    $scope.showActions = function () {
+       // Show the action sheet
+          $ionicActionSheet.show({
+           buttons: [
+             { text: "拍照" },
+             { text: "图片库"}
+           ],
+           titleText: "添加图片",
+           cancelText: '取消',
+           cancel: function() {
+             $scope.images = [];
+             $scope.newPost.title = "";
+             $scope.newPost.content = "";
+           },
+           buttonClicked: function(index) {
+             if(index === 0){
+                $scope.takePhoto();
+             }else if (index === 1){
+                $scope.pickImage();
+             }
+             return true;
+           }
+         });
+      };
 
-    //  $scope.posts = posts;
+    // Create the image Modal for show
+    $ionicModal.fromTemplateUrl('templates/imageModal.html', {
+         scope: $scope,
+         animation: 'slide-in-up'
+       }).then(function(modal) {
+         $scope.imageModel = modal;
+       });
 
-    // $rootScope.$on('newPost', function() {
-    //   $scope.posts= InfoListService.postList();
-    // });
+       $scope.showImageModal = function(url) {
+          //alert("gethere");
+         $scope.imageSrc = url;
+         $scope.imageModel.show();
+       };
 
-    //   function reloadInfoList() {
-    //     InfoListService.updateFromServer().then(
-    //     function() {
-    //       $scope.$broadcast('scroll.refreshComplete');
-    //     },
-    //     function(error){
-    //       $scope.$broadcast('scroll.refreshComplete');
-    //       //loadAppErrorHandler(error);
-    //       $ionicLoading.show({
-    //        template: "Unable to connect to server.<br>Status code: " + error.status,
-    //        duration: 2000
-    //      });
-    //     }
-    //   );
-    // }
+       $scope.closeImageModal = function() {
+         $scope.imageModel.hide();
+       };
 
-    // $scope.Like = function(selPost) {
-    //   var userId = User.getUserId();
-    //   var indexUser = selPost.likes.indexOf(userId);
-    //   if (indexUser > -1) {
-    //     selPost.likes.splice(indexUser, 1);
-    //   } else {
-    //     selPost.likes.push(userId);
-    //   }
+    $scope.images = [];
+    $scope.takePhoto = function() {
+      if($scope.images.length >=3){
+        $rootScope.notify("最多上传3张图片");
+        return ;
+      }
+      var imageURI= "img/avatar.jpg";
+      $scope.images.push({url:imageURI});
+    };
+
+    $scope.removePhoto = function(image) {
+        $log.log("removePhoto");
+        var indexImage = $scope.images.indexOf(image);
+        if (indexImage > -1) {
+          $scope.images.splice(indexImage, 1);
+        }
+    };
+
+    $scope.pickImage = function () {
+      if($scope.images.length >=3){
+        $rootScope.notify("最多上传3张图片");
+        return ;
+      }
+      var imageURI= "img/avatar.jpg";
+      $scope.images.push({url:imageURI});
+    };
+
+    //image picker
+    // $scope.pickImage = function () {
+    //     console.log("haha");
+    //     var options = {
+    //         maximumImagesCount: 1,
+    //         width: 800,
+    //         height: 800,
+    //         quality: 80
+    //     };
+    //     $cordovaImagePicker.getPictures(options)
+    //         .then(function (results) {
+    //             console.log(results);
+    //             $scope.images.push({url:results[0]});
+    //         }, function (error) {
+    //             // error getting photos
+    //         });
     // };
 
-    // $scope.isLike = function(selPost) {
-    //   var userId = User.getUserId();
-    //   var indexUser = selPost.likes.indexOf(userId);
-    //   if (indexUser != -1) {
-    //     return true;
-    //   } else {
-    //     return false;
+    // take photo with camera
+    // $scope.takePhoto = function() {
+    //   if($scope.images.length >=3){
+    //     alert("最多上传三张图片");
+    //     return ;
     //   }
+    //   Camera.getPicture().then(function(imageURI) {
+    //     console.log(imageURI);
+    //     $scope.images.push({url:imageURI});
+    //   }, function(err) {
+    //     console.err(err);
+    //     $rootScope.notify("出错了，重试一下");
+    //   });
     // };
+
+
+
+
 
     $scope.reloadPostList = function() {
       $rootScope.$broadcast('fetchAll');
@@ -190,34 +205,5 @@ angular.module('fcws.controllers')
 
     $rootScope.$broadcast('fetchAll');
 
-    //modify
-    //
-    // $scope.markCompleted = function (id) {
-    //     $rootScope.show("Please wait... Updating List");
-    //     API.putItem(id, {
-    //         isCompleted: true
-    //     }, $rootScope.getToken())
-    //         .success(function (data, status, headers, config) {
-    //             $rootScope.hide();
-    //             $rootScope.doRefresh(1);
-    //         }).error(function (data, status, headers, config) {
-    //             $rootScope.hide();
-    //             $rootScope.notify("Oops something went wrong!! Please try again later");
-    //         });
-    // };
-
-
-
-    // $scope.deleteItem = function (id) {
-    //     $rootScope.show("Please wait... Deleting from List");
-    //     API.deleteItem(id, $rootScope.getToken())
-    //         .success(function (data, status, headers, config) {
-    //             $rootScope.hide();
-    //             $rootScope.doRefresh(1);
-    //         }).error(function (data, status, headers, config) {
-    //             $rootScope.hide();
-    //             $rootScope.notify("Oops something went wrong!! Please try again later");
-    //         });
-    // };
 
   });

@@ -9,7 +9,8 @@ angular.module('fcws', [
   'fcws.controllers',
   'fcws.services',
   'fcws.utils',
-  'angularMoment'
+  'angularMoment',
+  'ngCordova'
 ])
 
 .run(function($ionicPlatform,amMoment) {
