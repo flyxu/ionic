@@ -175,7 +175,7 @@ angular.module('fcws.controllers')
     $scope.showActions = function (reply) {
 
         var title = "@"+ reply.userName;
-        var DeleteButton = ($scope.post.userId === reply.userId?"删除":"");
+        var DeleteButton = (User.getUserId() === reply.userId?"删除":"");
        // Show the action sheet
          var hideSheet = $ionicActionSheet.show({
            buttons: [
