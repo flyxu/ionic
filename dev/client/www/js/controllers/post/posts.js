@@ -2,20 +2,13 @@ angular.module('fcws.controllers')
   /*
   Controller for our 情报信息
   */
-  .controller('PostsCtrl', function(
-    $scope,
-    Posts,
-    $rootScope,
-    $ionicLoading,
-    User,
-    API,
-    $log,
-    $ionicModal,
-    $filter) {
+  .controller('PostsCtrl', function($scope,Posts,$rootScope,$ionicLoading,
+    User,API,$log,$ionicModal,$filter,Camera) {
 
-    $scope.post = {
+    $scope.newPost = {
       title: '',
-      content: ''
+      content: '',
+      images:[]
     };
 
     // Create the new topic modal that we will use later
@@ -26,6 +19,55 @@ angular.module('fcws.controllers')
       $scope.newPostModal = modal;
     });
 
+
+    $ionicModal.fromTemplateUrl('templates/imageModal.html', {
+         scope: $scope,
+         animation: 'slide-in-up'
+       }).then(function(modal) {
+         $scope.imageModel = modal;
+       });
+
+       $scope.showImageModal = function(url) {
+          //alert("gethere");
+         $scope.imageSrc = url;
+         $scope.imageModel.show();
+       };
+
+       $scope.closeImageModal = function() {
+         $scope.imageModel.hide();
+       };
+
+    $scope.images = [];
+    // $scope.getPhoto = function() {
+    //   if($scope.images.length >=3){
+    //     alert("最多上传三张图片");
+    //     return ;
+    //   }
+    //   var imageURI= "img/avatar.jpg";
+    //   $scope.images.push({url:imageURI});
+    // };
+    $scope.removePhoto = function(image) {
+        $log.log("removePhoto");
+        var indexImage = $scope.images.indexOf(image);
+        if (indexImage > -1) {
+          $scope.images.splice(indexImage, 1);
+        }
+    };
+
+    $scope.getPhoto = function() {
+      if($scope.images.length >=3){
+        alert("最多上传三张图片");
+        return ;
+      }
+      Camera.getPicture().then(function(imageURI) {
+        console.log(imageURI);
+        $scope.images.push({url:imageURI});
+      }, function(err) {
+        console.err(err);
+        $rootScope.notify("出错了，重试一下");
+      });
+    };
+
     // show new topic modal
     $scope.showNewPostModal = function() {
       $scope.newPostModal.show();
@@ -35,15 +77,15 @@ angular.module('fcws.controllers')
     };
 
     $scope.createNewPost = function() {
-      var title = $scope.post.title;
-      var content = $scope.post.content;
+      var title = $scope.newPost.title;
+      var content = $scope.newPost.content;
       var important = false;
       if (!title || !content) {
         $rootScope.notify("Please enter valid credentials");
         return false;
       }
 
-      if (this.post.important)
+      if (this.newPost.important)
         important = true;
       var date = new Date();
       var createDate = $filter('date')(date, 'yyyy-MM-dd HH:mm:ss');
