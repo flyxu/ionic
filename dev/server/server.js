@@ -19,7 +19,17 @@ server.use(function(req, res, next) {
 });
 
 server.get(/\/docs\/?.*/, restify.serveStatic({
-  directory: './documentation/v1',
+  directory: './assets/v1',
+  default: 'index.html'
+}));
+
+server.get(/\/images\/?.*/, restify.serveStatic({
+  directory: './assets/v1',
+  default: 'index.html'
+}));
+
+server.post(/\/images\/?.*/, restify.serveStatic({
+  directory: './assets/v1',
   default: 'index.html'
 }));
 
