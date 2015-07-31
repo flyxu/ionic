@@ -19,12 +19,15 @@
   margin-right: 35px;
 }
 
-.posts .content  .card .item{
-    border-top: 2px solid #4f8ef7;
+.posts .content  .item{
+   /*border-left: 5px solid #4f8ef7;*/
+    border-right: 6px solid #4f8ef7;
+
 }
 
-.posts .content .card .item.important{
-    border-top: 2px solid #d2173e;
+.posts .content .item.important{
+   /*border-left: 5px solid #d2173e;*/
+    border-right: 6px solid #d2173e;
   }
 
   .post .title {
