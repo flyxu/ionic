@@ -9,7 +9,8 @@
     <ion-refresher on-refresh="reloadPost()"></ion-refresher>
     <div class="row post">
       <div class="col col90">
-        <h4 class="title">{{post.title}}</h4>
+        <div class="topic-content" ng-bind-html="post.content">
+        </div>
         <div class="summary">
           <strong>
             <a href="#/user/{{post.userName}}">
@@ -20,8 +21,7 @@
           <!-- <span class="item-note" am-time-ago="topic.last_reply_at"></span> -->
           <span class="item-note" am-time-ago="post.createDate"></span>
         </div>
-        <div class="topic-content" ng-bind-html="post.content">
-        </div>
+
       </div>
     </div>
 

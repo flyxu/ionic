@@ -17,7 +17,7 @@
           <h2>
             <i class="icon ion-ios-bolt assertive" ng-if="post.important"></i>
             <i class="icon ion-ios-sunny positive" ng-if="!post.important"></i>
-            {{post.title}}
+            {{post.content | limitTo:lengthLimit}}{{post.content.length > lengthLimit?"...":""}}
             <span >
               <i class="icon ion-ios-heart item-note ">
                 {{post.likesCount >0?post.likesCount:0}}
@@ -33,7 +33,6 @@
             <span am-time-ago="post.createDate" class="item-note">
             </span>
           </p>
-
         </a>
       </div>
     </ion-list>

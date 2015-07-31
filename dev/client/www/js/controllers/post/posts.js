@@ -27,12 +27,12 @@ angular.module('fcws.controllers')
       $scope.newPostModal.hide();
     };
 
+    $scope.lengthLimit = 12;
     $scope.createNewPost = function() {
-      var title = $scope.newPost.title;
       var content = $scope.newPost.content;
       var important = false;
-      if (!title || !content) {
-        $rootScope.notify("Please enter valid credentials");
+      if (!content) {
+        $rootScope.notify("请输入情报内容");
         return false;
       }
 
@@ -46,7 +46,6 @@ angular.module('fcws.controllers')
         // id: id,
         userName: User.getUserName(),
         userId: User.getUserId(),
-        title: title,
         content: content,
         important: important,
         createDate: createDate,
