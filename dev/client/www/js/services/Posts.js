@@ -123,6 +123,15 @@ angular.module('fcws.services')
       //   posts.splice(0, 0, post);
       //   //  return true;
       // },
+      getRecent: function(token) {
+        return $http.get(SERVER.api + '/recent', {
+          method: 'GET',
+          params: {
+            token: token
+          }
+        });
+      },
+
       //获取所有情报
       getAll: function(token) {
         return $http.get(SERVER.api + '/posts', {

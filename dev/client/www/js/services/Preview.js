@@ -1,5 +1,5 @@
 angular.module('fcws.services')
-.factory('PreviewService', function($ionicModal, $rootScope,Docs,API) {
+.factory('PreviewService', function($ionicModal, $rootScope,API) {
 
   var init = function(tpl, $scope) {
 
