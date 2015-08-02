@@ -1,9 +1,28 @@
 module.exports = function(server, db) {
   var validateRequest = require("../../middlewares/validateRequest");
+  //get recent posts
+  server.get("/api/v1/recent", function(req, res, next) {
+    validateRequest.validate(req, res, db, function() {
+      db.postList.find({}).sort({createDate:-1}).limit(5, function(err, list) {
+        //console.log(list);
+        for(var i=0,l=list.length;i<l;i++){
+          var post = list[i];
+          post.likesCount = post.likes.length;
+          post.likes = undefined;
+        }
+        res.writeHead(200, {
+          'Content-Type': 'application/json; charset=utf-8'
+        });
+        res.end(JSON.stringify(list));
+      });
+    });
+    return next();
+  });
+
   //get all posts
   server.get("/api/v1/posts", function(req, res, next) {
     validateRequest.validate(req, res, db, function() {
-      db.postList.find({}, function(err, list) {
+      db.postList.find({}).sort({createDate:-1}, function(err, list) {
         //console.log(list);
         for(var i=0,l=list.length;i<l;i++){
           var post = list[i];

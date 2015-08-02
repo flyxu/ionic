@@ -6,9 +6,9 @@ angular.module('fcws.controllers')
     User,API,$log,$ionicModal,$filter,Camera,$cordovaImagePicker,$ionicActionSheet) {
 
     $scope.newPost = {
-      title: '',
       content: '',
-      images:[]
+      images:[],
+      important: false
     };
 
     // Create the new  post modal
@@ -21,18 +21,23 @@ angular.module('fcws.controllers')
 
     // show new topic modal
     $scope.showNewPostModal = function() {
+      $scope.newPost.content = "";
+      $scope.newPost.important = false;
       $scope.newPostModal.show();
     };
     $scope.closeNewPostModal = function() {
+
       $scope.newPostModal.hide();
+      $scope.newPost.content = "";
+      $scope.newPost.important = false;
     };
 
+    $scope.lengthLimit = 12;
     $scope.createNewPost = function() {
-      var title = $scope.newPost.title;
       var content = $scope.newPost.content;
       var important = false;
-      if (!title || !content) {
-        $rootScope.notify("Please enter valid credentials");
+      if (!content) {
+        $rootScope.notify("请输入情报内容");
         return false;
       }
 
@@ -46,7 +51,6 @@ angular.module('fcws.controllers')
         // id: id,
         userName: User.getUserName(),
         userId: User.getUserId(),
-        title: title,
         content: content,
         important: important,
         createDate: createDate,
