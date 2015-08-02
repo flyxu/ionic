@@ -15,8 +15,15 @@
         ui-sref='sidemenu.post({post_id: post._id})'>
           <img ng-src="img/avatar.jpg">
           <h2>
-            <i class="icon ion-ios-bolt assertive" ng-if="post.important"></i>
-            <i class="icon ion-ios-sunny positive" ng-if="!post.important"></i>
+            <!-- <i class="icon ion-ios-bolt assertive" ng-if="post.important"></i>
+            <i class="icon ion-ios-sunny positive" ng-if="!post.important"></i> -->
+
+            <button class= "button button-outline button-assertive button-small"
+            ng-if="post.important" >
+            紧急
+          </button>
+            <button class= "button button-outline button-positive button-small"
+            ng-if="!post.important" >日常</button>
             {{post.content | limitTo:lengthLimit}}{{post.content.length > lengthLimit?"...":""}}
             <span >
               <i class="icon ion-ios-heart item-note ">

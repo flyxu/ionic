@@ -6,9 +6,9 @@ angular.module('fcws.controllers')
     User,API,$log,$ionicModal,$filter,Camera,$cordovaImagePicker,$ionicActionSheet) {
 
     $scope.newPost = {
-      title: '',
       content: '',
-      images:[]
+      images:[],
+      important: false
     };
 
     // Create the new  post modal
@@ -21,10 +21,15 @@ angular.module('fcws.controllers')
 
     // show new topic modal
     $scope.showNewPostModal = function() {
+      $scope.newPost.content = "";
+      $scope.newPost.important = false;
       $scope.newPostModal.show();
     };
     $scope.closeNewPostModal = function() {
+
       $scope.newPostModal.hide();
+      $scope.newPost.content = "";
+      $scope.newPost.important = false;
     };
 
     $scope.lengthLimit = 12;

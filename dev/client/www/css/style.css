@@ -19,16 +19,14 @@
   margin-right: 35px;
 }
 
-.posts .content  .item{
-   /*border-left: 5px solid #4f8ef7;*/
+/*.posts .content  .item{
     border-right: 6px solid #4f8ef7;
 
 }
 
 .posts .content .item.important{
-   /*border-left: 5px solid #d2173e;*/
     border-right: 6px solid #d2173e;
-  }
+  }*/
 
   .post .title {
     margin: 0;
