@@ -1,12 +1,7 @@
 angular.module('fcws.controllers')
-.controller('TrainExamCtrl', function($scope,$state,User,PreviewService) {
+.controller('TrainExamCtrl', function($scope,$state,User,Docs) {
+  $scope.showDoc = function (doc) {
+      Docs.showDoc($scope,doc);
+  };
 
-  $scope.showDoc = function(doc) {
-      $scope.selectedDoc = doc;
-      PreviewService
-        .init('templates/docModal.html', $scope)
-        .then(function(modal) {
-          modal.show();
-        });
-    };
 });
