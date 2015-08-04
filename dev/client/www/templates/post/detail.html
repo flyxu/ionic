@@ -13,10 +13,10 @@
         </div>
         <div class="summary">
           <strong>
-            <a href="#/user/{{post.userName}}">
+            <p >
               <img ng-src="img/avatar.jpg" class="avatar">
               {{post.userName}}
-            </a>
+            </p>
           </strong>
           <!-- <span class="item-note" am-time-ago="topic.last_reply_at"></span> -->
           <span class="item-note" am-time-ago="post.createDate"></span>
@@ -32,9 +32,9 @@
       <ion-item class="item-avatar" ng-repeat="reply in post.replies" on-hold="showActions(reply)">
         <img ng-src="img/avatar.jpg" >
         <p>
-          <a href="#/user/{{reply.userName}}" ng-class="{'bold': reply.userId === post.userId}">
+          <p ng-class="{'bold': reply.userId === post.userId}">
             {{reply.userName}}
-          </a>
+          </p>
           <span class="item-note" am-time-ago="reply.createDate">
           </span>
         </p>

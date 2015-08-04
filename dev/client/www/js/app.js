@@ -210,27 +210,22 @@ angular.module('fcws', [
     }
   });
 
-
-
-
-
-
   $urlRouterProvider.otherwise('/auth/signin');
 
 })
 .constant('SERVER', {
   // if using local server
-  api: 'http://localhost:9804/api/v1',
-  docs:'http://localhost:9804/docs'
+  //api: 'http://localhost:9804/api/v1',
+  // docs:'http://localhost:9804/docs'
 
-  // api: 'http://114.212.83.116:9804/api/v1',
-  // docs:'http://114.212.83.116:9804/docs'
+  // api: 'http://192.168.59.103:9804/api/v1',
+  // docs:'http://192.168.59.103:9804/docs'
 
 
   // if using our public heroku server
-  //  url: 'http://nemoworks.info:9804/api/v1/'
+  api: 'http://nemoworks.info:9804/api/v1',
+  docs:'http://nemoworks.info:9804/docs'
 });
+angular.module('fcws.services', []);
 
 angular.module('fcws.controllers',['ionic', 'fcws.services']);
-
-angular.module('fcws.services', []);

@@ -1,4 +1,4 @@
-angular.module('fcws.services', [])
+angular.module('fcws.services')
 .factory('API', function ($rootScope, $http, $ionicLoading, $window,SERVER) {
         $rootScope.show = function (text) {
 
@@ -46,10 +46,14 @@ angular.module('fcws.services', [])
 
         return {
             signin: function (form) {
-                return $http.post(SERVER.api+'/auth/login', form);
+                var url = SERVER.api+'/auth/login';
+                console.log(url);
+                return $http.post(url, form);
             },
             signup: function (form) {
-                return $http.post(SERVER.api+'/auth/register', form);
+                var url = SERVER.api+'/auth/register';
+                console.log(url);
+                return $http.post(url, form);
             },
           };
 });
