@@ -1,5 +1,5 @@
 angular.module('fcws.controllers')
-.controller('TrainSearchCtrl', function($scope,$state,User) {
+.controller('TrainSearchCtrl', function($scope,$state,User,Docs) {
   $scope.docs = [
     {
       name: "指挥体制"
@@ -32,13 +32,7 @@ angular.module('fcws.controllers')
       name: "对在军事训练中做好预备役部队的思想政治工作"
     }
   ];
-  
-  $scope.showDoc = function(doc) {
-      $scope.selectedDoc = doc;
-      PreviewService
-        .init('templates/docModal.html', $scope)
-        .then(function(modal) {
-          modal.show();
-        });
-    };
+  $scope.showDoc = function (doc) {
+      Docs.showDoc($scope,doc);
+  };
 });

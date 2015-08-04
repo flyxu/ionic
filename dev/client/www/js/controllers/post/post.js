@@ -1,6 +1,6 @@
 angular.module('fcws.controllers')
   .controller('PostCtrl', function($scope, Posts, $ionicPopup, User, $filter, $stateParams,
-    $rootScope, API, $log, Post, $state) {
+    $rootScope, API, $log, Post, $state,$ionicActionSheet,$timeout) {
     //force angular to create post object
     $scope.post = {
       id: "",
@@ -77,15 +77,30 @@ angular.module('fcws.controllers')
     //   return (userToken == postToken);
     // };
 
+    $scope.replyData ={
+      content : ""
+    };
     //  modify
-    $scope.addReply = function(reply) {
+    $scope.addReply = function() {
       $rootScope.show("Please wait... Adding reply");
+
+      var date = new Date();
+      var createDate = $filter('date')(date, 'yyyy-MM-dd HH:mm:ss');
+      var reply =
+      {
+        userId: User.getUserId(),
+        userName: User.getUserName(),
+        postId: id,
+        content: $scope.replyData.content,
+        createDate: createDate
+      };
 
       Post.saveReply(id, reply)
         .success(function(data, status, headers, config) {
           $rootScope.hide();
           //$scope.post.comments.push(reply);
           //$rootScope.$broadcast('addComment');
+          $scope.replyData.content = "";
           $scope.loadPost();
         }).error(function(data, status, headers, config) {
           $rootScope.hide();
@@ -126,7 +141,7 @@ angular.module('fcws.controllers')
 
 
     // delete post confirm dialog
-    $scope.showDeleteConfirm = function() {
+    $scope.showDeletePostConfirm = function() {
       var confirmPopup = $ionicPopup.confirm({
         title: '确认删除？',
         template: '您确定要删除这个情报吗?'
@@ -157,46 +172,71 @@ angular.module('fcws.controllers')
       });
     };
 
+    $scope.showActions = function (reply) {
+
+        var title = "@"+ reply.userName;
+        var DeleteButton = (User.getUserId() === reply.userId?"删除":"");
+       // Show the action sheet
+         var hideSheet = $ionicActionSheet.show({
+           buttons: [
+             { text: "回复" },
+           ],
+           destructiveText: DeleteButton,
+           titleText: title,
+           cancelText: '取消',
+           cancel: function() {
+           },
+          destructiveButtonClicked: function () {
+            $log.log("get here");
+            $scope.showDeleteReplyConfirm(reply);
+            return true;
+          },
+           buttonClicked: function(index) {
+             if(index === 0){
+                $scope.replyData.content = title+" ";
+                $timeout(function() {
+                  document.querySelector('.reply-new input').focus();
+                }, 1);
+             }
+             return true;
+           }
+         });
+      };
+
+
+
 
     //make reply dialog
-    $scope.makeComment = function() {
-      $scope.data = {};
-      // An elaborate, custom popup
-      var myPopup = $ionicPopup.show({
-        template: '<input type="text" ng-model="data.comment">',
-        title: '我也说一句',
-        scope: $scope,
-        buttons: [{
-          text: '取消'
-        }, {
-          text: '<b>发表</b>',
-          type: 'button-positive',
-          onTap: function(e) {
-            if (!$scope.data.comment) {
-              //don't allow the user to close unless he enters wifi password
-              e.preventDefault();
-            } else {
-              return $scope.data.comment;
-            }
-          }
-        }]
-      });
-      myPopup.then(function(res) {
-        console.log('Tapped!', res);
-        if (res) {
-          var date = new Date();
-          var createDate = $filter('date')(date, 'yyyy-MM-dd HH:mm:ss');
-          $scope.addReply({
-            userId: User.getUserId(),
-            userName: User.getUserName(),
-            postId: id,
-            content: res,
-            createDate: createDate
-          });
-        }
-      });
-      // $timeout(function() {
-      //    myPopup.close(); //close the popup after 3 seconds for some reason
-      // }, 3000);
-    };
+    // $scope.makeComment = function() {
+    //   $scope.data = {};
+    //   // An elaborate, custom popup
+    //   var myPopup = $ionicPopup.show({
+    //     template: '<input type="text" ng-model="data.comment">',
+    //     title: '我也说一句',
+    //     scope: $scope,
+    //     buttons: [{
+    //       text: '取消'
+    //     }, {
+    //       text: '<b>发表</b>',
+    //       type: 'button-positive',
+    //       onTap: function(e) {
+    //         if (!$scope.data.comment) {
+    //           //don't allow the user to close unless he enters wifi password
+    //           e.preventDefault();
+    //         } else {
+    //           return $scope.data.comment;
+    //         }
+    //       }
+    //     }]
+    //   });
+    //   myPopup.then(function(res) {
+    //     console.log('Tapped!', res);
+    //     if (res) {
+    //
+    //     }
+    //   });
+    //   // $timeout(function() {
+    //   //    myPopup.close(); //close the popup after 3 seconds for some reason
+    //   // }, 3000);
+    // };
   });

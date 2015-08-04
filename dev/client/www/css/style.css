@@ -19,10 +19,83 @@
   margin-right: 35px;
 }
 
-.posts .content  .card .item{
-    border-top: 4px solid #4f8ef7;
+/*.posts .content  .item{
+    border-right: 6px solid #4f8ef7;
+
 }
 
-.posts .content .card .item.important{
-    border-top: 4px solid #d2173e;
+.posts .content .item.important{
+    border-right: 6px solid #d2173e;
+  }*/
+
+  .post .title {
+    margin: 0;
   }
+.post .summary {
+    margin: 8px 0;
+  }
+
+.post .avatar {
+    width: 16px;
+    border-radius: 8px;
+    vertical-align: middle;
+  }
+
+.replies .item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  white-space: normal;
+}
+
+.replies .reply-content img {
+  max-width: 100%;
+}
+
+.replies .reply-content p {
+  overflow: visible !important;
+  white-space: normal !important;
+}
+
+.replies p{
+  color: #08c;
+  text-decoration: none;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.post .summary a {
+  color: #08c;
+  text-decoration: none;
+}
+
+
+.reply-new input {
+  background: transparent;
+}
+
+
+.image-modal {
+    background-color: #212326;
+    width: 100% !important;
+    height: 100%;
+    top: 0 !important;
+    left: 0 !important;
+}
+
+.transparent {
+    background: transparent !important;
+}
+
+.fullscreen-image {
+    max-width: 100%;
+    max-height: 100%;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+}

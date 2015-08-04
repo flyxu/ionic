@@ -8,10 +8,17 @@ angular.module('fcws', [
   'ionic',
   'fcws.controllers',
   'fcws.services',
-  'fcws.utils'])
+  'fcws.utils',
+  'angularMoment',
+  'ngCordova'
+])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,amMoment) {
+  // change language to zh-cn
+  amMoment.changeLocale('zh-cn');
+
   $ionicPlatform.ready(function() {
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -89,16 +96,6 @@ angular.module('fcws', [
       'menuContent': {
         templateUrl: "templates/post/detail.html",
         controller: 'PostCtrl',
-      }
-    }
-  })
-
-  .state('sidemenu.new', {
-    url: "/new",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/post/new.html",
-        controller: 'NewCtrl'
       }
     }
   })
@@ -213,24 +210,22 @@ angular.module('fcws', [
     }
   });
 
-
-
-
-
-
   $urlRouterProvider.otherwise('/auth/signin');
 
 })
-
 .constant('SERVER', {
   // if using local server
-  // api: 'http://localhost:9804/api/v1',
+  //api: 'http://localhost:9804/api/v1',
   // docs:'http://localhost:9804/docs'
 
-  api: 'http://114.212.83.116:9804/api/v1',
-  docs:'http://114.212.83.116:9804/docs'
+  // api: 'http://192.168.59.103:9804/api/v1',
+  // docs:'http://192.168.59.103:9804/docs'
 
 
   // if using our public heroku server
-  //  url: 'http://nemoworks.info:9804/api/v1/'
+  api: 'http://nemoworks.info:9804/api/v1',
+  docs:'http://nemoworks.info:9804/docs'
 });
+angular.module('fcws.services', []);
+
+angular.module('fcws.controllers',['ionic', 'fcws.services']);
