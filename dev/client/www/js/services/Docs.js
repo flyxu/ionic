@@ -13,7 +13,7 @@ angular.module('fcws.services')
           return this.getDocDataFromServer(url);
         },
         showDoc :function($scope,doc) {
-            $rootScope.show("正在从服务器获取数据");
+            $rootScope.show("正在从服务器获取数据,请稍等...");
             this.getDocData(doc)
             .success(function(data,status, headers, config) {
               $scope.docHtml= data;
@@ -28,9 +28,18 @@ angular.module('fcws.services')
             .error(function(data, status, headers, config) {
               console.log("error: "+ status+" " +data);
               $rootScope.hide();
-              $rootScope.notify("额，貌似出错了");
+              $rootScope.notify("出错了!!请检查网络后重试");
             });
 
           },
+          showDefalutDoc : function ($scope,docName) {
+            //$rootScope.show("正在获取数据");
+            $scope.docHtml= docName;
+            PreviewService
+              .init('templates/docModal.html', $scope)
+              .then(function(modal) {
+                modal.show();
+              });
+          }
       };
   });

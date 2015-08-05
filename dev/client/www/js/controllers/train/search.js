@@ -33,6 +33,6 @@ angular.module('fcws.controllers')
     }
   ];
   $scope.showDoc = function (doc) {
-      Docs.showDoc($scope,doc);
+      Docs.showDefalutDoc($scope,doc.name);
   };
 });

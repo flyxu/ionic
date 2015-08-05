@@ -3,7 +3,7 @@ angular.module('fcws.services')
         $rootScope.show = function (text) {
 
             $rootScope.loading = $ionicLoading.show({
-                template: text ? text : 'Loading',
+                template: text ? text : '读取中',
             });
         };
 

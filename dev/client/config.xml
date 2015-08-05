@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.zlyc870769" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>DevApp</name>
+  <name>凤城卫士</name>
   <description>
         Ionic Restify and MongoDB - An End to End Hybrid App
     </description>

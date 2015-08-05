@@ -19,7 +19,7 @@ angular.module('fcws.controllers')
     $scope.userId = User.getUserId();
 
     $scope.loadPost = function() {
-      $rootScope.show("Please wait... Processing");
+      $rootScope.show("处理中,请等待...");
       Post.getPost(id)
         .success(function(data, status, headers, config) {
           $scope.post = data;
@@ -28,7 +28,7 @@ angular.module('fcws.controllers')
         })
         .error(function(data, status, headers, config) {
           $rootScope.hide();
-          $rootScope.notify("Oops something went wrong!! Please try again later");
+          $rootScope.notify("出错了!! 请检查网络后重试");
         });
     };
     $scope.loadPost();
@@ -42,7 +42,7 @@ angular.module('fcws.controllers')
     // }
 
     $scope.Like = function() {
-      $rootScope.show("Please wait... 正在点赞");
+      $rootScope.show("正在点赞,请稍等...");
       Post.likePost(id)
       .success(function(response, status, headers, config) {
           //var user_id = User.getUserId();
@@ -56,7 +56,7 @@ angular.module('fcws.controllers')
         })
       .error(function(data, status, headers, config) {
           $rootScope.hide();
-          $rootScope.notify("Oops something went wrong!! Please try again later");
+          $rootScope.notify("出错了!! 请检查网络后重试");
         });
     };
 
@@ -82,7 +82,7 @@ angular.module('fcws.controllers')
     };
     //  modify
     $scope.addReply = function() {
-      $rootScope.show("Please wait... Adding reply");
+      $rootScope.show("正在添加评论,请稍等...");
 
       var date = new Date();
       var createDate = $filter('date')(date, 'yyyy-MM-dd HH:mm:ss');
@@ -104,14 +104,14 @@ angular.module('fcws.controllers')
           $scope.loadPost();
         }).error(function(data, status, headers, config) {
           $rootScope.hide();
-          $rootScope.notify("Oops something went wrong!! Please try again later");
+          $rootScope.notify("出错了!! 请检查网络后重试");
         });
     };
 
 
     //delete post
     $scope.deletePost = function() {
-      $rootScope.show("Please wait... Deleting from List");
+      $rootScope.show("正在删除情报,请稍等...");
       Post.deletePost(id)
         .success(function(data, status, headers, config) {
           $rootScope.hide();
@@ -119,13 +119,13 @@ angular.module('fcws.controllers')
           $state.go('sidemenu.posts');
         }).error(function(data, status, headers, config) {
           $rootScope.hide();
-          $rootScope.notify("Oops something went wrong!! Please try again later");
+          $rootScope.notify("出错了!! 请检查网络后重试");
         });
     };
 
     //delete reply
     $scope.deleteReply = function(reply) {
-      $rootScope.show("Please wait... Deleting reply");
+      $rootScope.show("正在删除评论,请稍等...");
       var reply_id = reply._id;
       console.log(reply_id);
       Post.deleteReply(reply_id,id)
@@ -134,7 +134,7 @@ angular.module('fcws.controllers')
           $rootScope.hide();
         }).error(function(data, status, headers, config) {
           $rootScope.hide();
-          $rootScope.notify("Oops something went wrong!! Please try again later");
+          $rootScope.notify("出错了!! 请检查网络后重试");
         });
     };
 

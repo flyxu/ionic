@@ -11,6 +11,10 @@ angular.module('fcws.controllers')
       important: false
     };
 
+    $scope.$on('$ionicView.beforeEnter', function() {
+        $scope.loadPosts();
+      });
+
     // Create the new  post modal
     $ionicModal.fromTemplateUrl('templates/post/newModal.html', {
       animation: 'slide-in-up',
@@ -175,19 +179,9 @@ angular.module('fcws.controllers')
     // };
 
 
-
-
-
-    $scope.reloadPostList = function() {
-      $rootScope.$broadcast('fetchAll');
-      $rootScope.$broadcast('scroll.refreshComplete');
-    };
-
-    $rootScope.$on('fetchAll', function() {
-      $log.log("get fetchAll broadcast");
-      $log.log("user token: " + User.getToken());
+    $scope.loadPosts = function () {
       Posts.getAll(User.getToken()).success(function(data, status, headers, config) {
-        $rootScope.show("Please wait... Processing");
+        $rootScope.show("处理中,请稍等...");
         $scope.posts = [];
         $log.log("data.length: " + data.length);
         for (var i = 0; i < data.length; i++) {
@@ -203,11 +197,23 @@ angular.module('fcws.controllers')
         $rootScope.hide();
       }).error(function(data, status, headers, config) {
         $rootScope.hide();
-        $rootScope.notify("Oops something went wrong!! Please try again later");
+        $rootScope.notify("出错了!!请检查网络后重试");
       });
+    };
+
+
+    $scope.reloadPostList = function() {
+      $rootScope.$broadcast('fetchAll');
+      $rootScope.$broadcast('scroll.refreshComplete');
+    };
+
+    $rootScope.$on('fetchAll', function() {
+      $log.log("get fetchAll broadcast");
+      $log.log("user token: " + User.getToken());
+      $scope.loadPosts();
     });
 
-    $rootScope.$broadcast('fetchAll');
+    //$rootScope.$broadcast('fetchAll');
 
 
   });
