@@ -119,14 +119,14 @@ angular.module('fcws.controllers')
        };
 
     $scope.images = [];
-    $scope.takePhoto = function() {
-      if($scope.images.length >=3){
-        $rootScope.notify("最多上传3张图片");
-        return ;
-      }
-      var imageURI= "img/avatar.jpg";
-      $scope.images.push({url:imageURI});
-    };
+    // $scope.takePhoto = function() {
+    //   if($scope.images.length >=3){
+    //     $rootScope.notify("最多上传3张图片");
+    //     return ;
+    //   }
+    //   var imageURI= "img/avatar.jpg";
+    //   $scope.images.push({url:imageURI});
+    // };
 
     $scope.removePhoto = function(image) {
         $log.log("removePhoto");
@@ -164,19 +164,19 @@ angular.module('fcws.controllers')
     // };
 
     // take photo with camera
-    // $scope.takePhoto = function() {
-    //   if($scope.images.length >=3){
-    //     alert("最多上传三张图片");
-    //     return ;
-    //   }
-    //   Camera.getPicture().then(function(imageURI) {
-    //     console.log(imageURI);
-    //     $scope.images.push({url:imageURI});
-    //   }, function(err) {
-    //     console.err(err);
-    //     $rootScope.notify("出错了，重试一下");
-    //   });
-    // };
+    $scope.takePhoto = function() {
+      if($scope.images.length >=3){
+        alert("最多上传三张图片");
+        return ;
+      }
+      Camera.getPicture().then(function(imageURI) {
+        console.log(imageURI);
+        $scope.images.push({url:imageURI});
+      }, function(err) {
+        console.err(err);
+        $rootScope.notify("出错了，重试一下");
+      });
+    };
 
 
     $scope.loadPosts = function () {
